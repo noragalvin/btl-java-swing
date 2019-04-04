@@ -10,11 +10,11 @@ go
 
 use QLQAN
 
-create table shops
+create table categories
 (
-	id int not null IDENTITY(1,1) primary key,
+	id int not null primary key,
 	name nvarchar(50),
-	address nvarchar(100)
+	status bit
 )
 
 create table foods
@@ -22,14 +22,16 @@ create table foods
 	id char(5) not null primary key,
 	name nvarchar(50),
 	price money,
-	quantity int
+	quantity int,
+	status bit,
+	category_id int foreign key references categories(id) on update cascade on delete cascade
 )
 
 create table staffs
 (
 	id int not null IDENTITY(1,1) primary key,
-	shop_id int foreign key references shops(id) on update cascade on delete cascade,
-	working_time nvarchar(10)
+	name nvarchar(10),
+	working_time nvarchar(10) --morning, afternoon
 )
 
 create table bills
@@ -48,7 +50,6 @@ create table food_bills
 	food_quantity int
 )
 
-
 create table vouchers
 (
 	id char(5) not null primary key,
@@ -61,15 +62,14 @@ create table customers
 	voucher_id char(5) foreign key references vouchers(id) on update cascade on delete cascade,
 	name nvarchar(50),
 	address nvarchar(100),
-	visit_time datetime
+	visit_time datetime,
+	point int
 )
 
 create table checkin_checkout
 (
 	id int not null IDENTITY(1,1) primary key,
 	staff_id int foreign key references staffs(id) on update cascade on delete cascade,
-	checkin int,
-	checkout int,
-	checkin_time datetime,
-	checkout_time datetime
+	check_time datetime,
+	type bit
 )
