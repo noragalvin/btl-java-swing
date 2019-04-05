@@ -10,16 +10,16 @@ package entities;
  *
  * @author aboyb
  */
-public class Food {
-    private int id, quantity, status, category_id;
-    private String name;
+public class Product {
+    private int quantity, status, category_id;
+    private String name, id;
     private double price;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -63,10 +63,10 @@ public class Food {
         this.price = price;
     }
 
-    public Food() {
+    public Product() {
     }
 
-    public Food(int id, int quantity, int status, int category_id, String name, double price) {
+    public Product(String id, int quantity, int status, int category_id, String name, double price) {
         this.id = id;
         this.quantity = quantity;
         this.status = status;
@@ -77,8 +77,9 @@ public class Food {
 
     @Override
     public String toString() {
-        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+        return "Product{" + "quantity=" + quantity + ", status=" + status + ", category_id=" + category_id + ", name=" + name + ", id=" + id + ", price=" + price + '}';
     }
+
     
     
 }
