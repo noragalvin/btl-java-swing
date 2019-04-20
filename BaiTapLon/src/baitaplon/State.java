@@ -6,22 +6,15 @@
 
 package baitaplon;
 
-import forms.Login;
-import models.Database;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author aboyb
  */
-public class BaiTapLon {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        new Login().setVisible(true);
-    }
+public class State {
+    public static ArrayList<HashMap> productState = new ArrayList<HashMap>();
+    public static int a, b;
     
-  
 }
-    

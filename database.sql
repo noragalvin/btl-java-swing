@@ -32,7 +32,7 @@ create table staffs
 (
 	id int not null IDENTITY(1,1) primary key,
 	name nvarchar(10),
-	working_time nvarchar(10) --morning, afternoon
+	password nvarchar(10)
 )
 
 create table customers
@@ -73,13 +73,6 @@ create table product_bills
 	primary key(product_id, bill_id)
 )
 
-create table checkin_checkout
-(
-	id int not null IDENTITY(1,1) primary key,
-	staff_id int foreign key references staffs(id) on update cascade,
-	check_time datetime,
-	type bit
-)
 
 
 insert into categories(name)  values (N'Đồ uống')
