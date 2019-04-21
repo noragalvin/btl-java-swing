@@ -97,4 +97,3 @@ select * from categories;
 select * from products;
 select * from staffs;
 
-SELECT TOP 6 products.*, categories.id as catID, categories.name as catName, categories.status as catStatusFROM products INNER JOIN categories ON products.category_id = categories.id
