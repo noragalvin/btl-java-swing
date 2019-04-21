@@ -10,7 +10,7 @@ package entities;
  *
  * @author aboyb
  */
-public class Product {
+public class DTOProduct {
     private int quantity, status, category_id;
     private String name, id;
     private double price;
@@ -63,10 +63,10 @@ public class Product {
         this.price = price;
     }
 
-    public Product() {
+    public DTOProduct() {
     }
 
-    public Product(String id, int quantity, int status, int category_id, String name, double price) {
+    public DTOProduct(String id, int quantity, int status, int category_id, String name, double price) {
         this.id = id;
         this.quantity = quantity;
         this.status = status;

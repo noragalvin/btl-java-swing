@@ -19,7 +19,9 @@ public class BaiTapLon {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        State.db = new Database();
         new Login().setVisible(true);
+        
     }
     
   

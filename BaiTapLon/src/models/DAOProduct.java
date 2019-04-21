@@ -6,13 +6,16 @@
 
 package models;
 
-import entities.Category;
-import entities.Product;
+import baitaplon.State;
+import entities.DTOCategory;
+import entities.DTOProduct;
+import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,14 +27,14 @@ public class DAOProduct {
     Database db;
     Connection conn;
 
-    public DAOProduct(Database db) {
-        this.db = db;
+    public DAOProduct() {
+        this.db = State.db;
         conn = db.getConnection();
     }
     
     
     // Cach 1
-    public int Insert(Product p){
+    public int Insert(DTOProduct p){
         int n = 0;
         String query = String.format("insert into products(id, name, price, quantity, category_id) values ('%s', N'%s', %f, %d, %d)", p.getId(), p.getName(), p.getPrice(), p.getQuantity(), p.getCategory_id());
         try {
@@ -46,7 +49,7 @@ public class DAOProduct {
     }
     
     // Cach 2
-    public int Add(Product p){
+    public int Add(DTOProduct p){
         int n = 0;
         String query = "insert into products(id, name, price, quantity, category_id) values (?, ?, ?, ?, ?)";
         PreparedStatement pre;
@@ -66,7 +69,7 @@ public class DAOProduct {
         return n;
     }
     
-    public int Update(Product p) {
+    public int Update(DTOProduct p) {
         int n = 0;
         
         String query = "UPDATE Product SET name = ?, price = ?, quantity = ?, category_id = ? WHERE id = ?";
@@ -89,7 +92,7 @@ public class DAOProduct {
         return n;
     }
     
-    public int ToggleStatus(Product p){
+    public int ToggleStatus(DTOProduct p){
         int n = 0;
         
         // Toggle 1 to 0 and 0 to 1
@@ -112,28 +115,32 @@ public class DAOProduct {
         return n;
     }
     
-    public void List() {
-        String query = "SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus FROM products INNER JOIN categories ON products.category_id = categories.id";
+    public ArrayList<DTOProduct> List(String filter) {
+        String query = "";
+        ArrayList<DTOProduct> products = new ArrayList<DTOProduct>();
+        switch(filter){
+            case "all":
+                query = "SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus FROM products INNER JOIN categories ON products.category_id = categories.id";
+                break;
+            default:
+                query = "SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus FROM products INNER JOIN categories ON products.category_id = categories.id";
+                break;
+        }
         ResultSet rs = db.getData(query);
         
         try {
             while(rs.next()){
-                Category cat = new Category(rs.getInt("catID"), rs.getInt("catStatus"), rs.getString("catName"));
-                Product p = new Product(rs.getString("id"), rs.getInt("quantity"), rs.getInt("status"), rs.getInt("category_id"), rs.getString("name"), rs.getDouble("price"));
-                System.out.println(cat);
-                System.out.println(p);
+                //DTOCategory cat = new DTOCategory(rs.getInt("catID"), rs.getInt("catStatus"), rs.getString("catName"));
+                DTOProduct p = new DTOProduct(rs.getString("id"), rs.getInt("quantity"), rs.getInt("status"), rs.getInt("category_id"), rs.getString("name"), rs.getDouble("price"));
+                products.add(p);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return products;
     }
-    
-    
-    public static void main(String[] args) {
-        Database db = new Database();
-        DAOProduct daoProduct = new DAOProduct(db);
-        daoProduct.List();
-    }
+
     
     
     

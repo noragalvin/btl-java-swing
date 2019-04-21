@@ -10,7 +10,7 @@ package entities;
  *
  * @author aboyb
  */
-public class Category {
+public class DTOCategory {
     private int id, status;
     private String name;
 
@@ -38,10 +38,10 @@ public class Category {
         this.name = name;
     }
 
-    public Category() {
+    public DTOCategory() {
     }
 
-    public Category(int id, int status, String name) {
+    public DTOCategory(int id, int status, String name) {
         this.id = id;
         this.status = status;
         this.name = name;

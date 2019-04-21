@@ -6,15 +6,18 @@
 
 package baitaplon;
 
+import entities.DTOStaff;
 import java.util.ArrayList;
 import java.util.HashMap;
+import models.Database;
 
 /**
  *
  * @author aboyb
  */
 public class State {
-    public static ArrayList<HashMap> productState = new ArrayList<HashMap>();
-    public static int a, b;
+    public static ArrayList<HashMap> currentProducts = new ArrayList<HashMap>();
+    public static Database db;
+    public static DTOStaff currentUser;
     
 }

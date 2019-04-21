@@ -7,6 +7,8 @@
 package forms;
 
 import baitaplon.State;
+import controllers.BULProduct;
+import entities.DTOProduct;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
@@ -15,14 +17,17 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
  * @author aboyb
  */
 public class IndexStaff extends javax.swing.JFrame {
-    private ArrayList<JPanel> products;
+    private ArrayList<DTOProduct> products;
         
 
     /**
@@ -32,6 +37,9 @@ public class IndexStaff extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         initProducts();
+
+        lblName.setText("Hi, " + State.currentUser.getName());
+        pnContent.setBorder(new EmptyBorder(10, 10, 10, 10));
     }
 
     /**
@@ -49,11 +57,22 @@ public class IndexStaff extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        pnCurrentUser = new javax.swing.JPanel();
+        lblName = new javax.swing.JLabel();
         pnContent = new javax.swing.JPanel();
+        pnSearch = new javax.swing.JPanel();
+        txtSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        lblFilter = new javax.swing.JLabel();
+        pnPagination = new javax.swing.JPanel();
+        pnList = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
+        pnTab.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jButton1.setText("All");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton1MousePressed(evt);
@@ -76,42 +95,126 @@ public class IndexStaff extends javax.swing.JFrame {
 
         jButton4.setText("jButton4");
 
+        javax.swing.GroupLayout pnCurrentUserLayout = new javax.swing.GroupLayout(pnCurrentUser);
+        pnCurrentUser.setLayout(pnCurrentUserLayout);
+        pnCurrentUserLayout.setHorizontalGroup(
+            pnCurrentUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnCurrentUserLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+        pnCurrentUserLayout.setVerticalGroup(
+            pnCurrentUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnCurrentUserLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout pnTabLayout = new javax.swing.GroupLayout(pnTab);
         pnTab.setLayout(pnTabLayout);
         pnTabLayout.setHorizontalGroup(
             pnTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnTabLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
+            .addComponent(pnCurrentUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTabLayout.createSequentialGroup()
                 .addGroup(pnTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addContainerGap(101, Short.MAX_VALUE))
+                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnTabLayout.setVerticalGroup(
             pnTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnTabLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jButton1)
-                .addGap(47, 47, 47)
-                .addComponent(jButton2)
-                .addGap(49, 49, 49)
-                .addComponent(jButton3)
-                .addGap(44, 44, 44)
-                .addComponent(jButton4)
-                .addContainerGap(165, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTabLayout.createSequentialGroup()
+                .addComponent(pnCurrentUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(118, Short.MAX_VALUE))
+        );
+
+        btnSearch.setText("Search");
+
+        jLabel1.setText("Filter:");
+
+        lblFilter.setText("All");
+
+        javax.swing.GroupLayout pnSearchLayout = new javax.swing.GroupLayout(pnSearch);
+        pnSearch.setLayout(pnSearchLayout);
+        pnSearchLayout.setHorizontalGroup(
+            pnSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnSearchLayout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFilter)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(btnSearch)
+                .addGap(66, 66, 66))
+        );
+        pnSearchLayout.setVerticalGroup(
+            pnSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnSearchLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch)
+                    .addComponent(jLabel1)
+                    .addComponent(lblFilter))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnPagination.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        javax.swing.GroupLayout pnPaginationLayout = new javax.swing.GroupLayout(pnPagination);
+        pnPagination.setLayout(pnPaginationLayout);
+        pnPaginationLayout.setHorizontalGroup(
+            pnPaginationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnPaginationLayout.setVerticalGroup(
+            pnPaginationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 43, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout pnListLayout = new javax.swing.GroupLayout(pnList);
+        pnList.setLayout(pnListLayout);
+        pnListLayout.setHorizontalGroup(
+            pnListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnListLayout.setVerticalGroup(
+            pnListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnContentLayout = new javax.swing.GroupLayout(pnContent);
         pnContent.setLayout(pnContentLayout);
         pnContentLayout.setHorizontalGroup(
             pnContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 784, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnContentLayout.createSequentialGroup()
+                .addGroup(pnContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnPagination, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnContentLayout.setVerticalGroup(
             pnContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
+            .addGroup(pnContentLayout.createSequentialGroup()
+                .addComponent(pnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnPagination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout pnContainerLayout = new javax.swing.GroupLayout(pnContainer);
@@ -119,8 +222,9 @@ public class IndexStaff extends javax.swing.JFrame {
         pnContainerLayout.setHorizontalGroup(
             pnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnContainerLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(pnTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnContainerLayout.setVerticalGroup(
@@ -143,16 +247,6 @@ public class IndexStaff extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-        // TODO add your handling code here:
-        HashMap state = new HashMap();
-        state.put("1", "5");
-        State.productState.add(state);
-        State.a = 1;
-        System.out.println("added");
-        
-    }//GEN-LAST:event_jButton1MousePressed
-
     private void jButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MousePressed
         // TODO add your handling code here:
         new Login().setVisible(true);
@@ -161,17 +255,19 @@ public class IndexStaff extends javax.swing.JFrame {
 
     private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
         // TODO add your handling code here:
-        HashMap state = new HashMap();
-        state.put("2", "10");
-        State.b = 2;
-        State.productState.add(state);
-        System.out.println("added");
     }//GEN-LAST:event_jButton2MousePressed
+
+    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jButton1MousePressed
 
     private void initProducts()
     {
-        products = new ArrayList<>();
-        pnContent.setLayout(new GridLayout(2, 3));
+        BULProduct bulProduct = new BULProduct();
+        products = bulProduct.getProducts(lblFilter.getText().toLowerCase());
+        System.out.println(products.get(0));
+        pnList.setLayout(new GridLayout(2, 3));
         Color color[] = {
             Color.white,
             Color.black,
@@ -180,17 +276,33 @@ public class IndexStaff extends javax.swing.JFrame {
             Color.orange,
             Color.gray
         };
-        for(int i = 0; i < 6; i++)
+        for(int i = 0; i < products.size(); i++)
         {
-            products.add(new JPanel());
-            products.get(i).setName("product-"+i);
-            products.get(i).addMouseListener(new MouseAdapter() {
+            JPanel p = new JPanel();
+            p.setName("product-"+i);
+            //p.setBackground(color[i]);
+            p.setBorder(BorderFactory.createLineBorder(Color.black));
+            
+            JLabel lbl = new JLabel(products.get(i).getName());
+            p.add(lbl);
+            
+            p.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent ev){
                     System.out.println(((JPanel)ev.getSource()).getName());
                 }
             });
-            products.get(i).setBackground(color[i]);
-            pnContent.add(products.get(i));
+            pnList.add(p);
+            
+            if(products.size() < 6 && i == products.size()-1){
+                System.out.println("out");
+                for(int j = 0; j < 6 - products.size(); j++){
+                    System.out.println("added");
+                    JPanel pn = new JPanel();
+                    pnList.add(pn);
+                }
+            }
+            
+         
             //setVisible(true);
             //setDefaultCloseOperation(3);
             //setSize(400, 400);
@@ -233,12 +345,21 @@ public class IndexStaff extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblFilter;
+    private javax.swing.JLabel lblName;
     private javax.swing.JPanel pnContainer;
     private javax.swing.JPanel pnContent;
+    private javax.swing.JPanel pnCurrentUser;
+    private javax.swing.JPanel pnList;
+    private javax.swing.JPanel pnPagination;
+    private javax.swing.JPanel pnSearch;
     private javax.swing.JPanel pnTab;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,12 +7,15 @@
 package forms;
 
 import baitaplon.State;
+import controllers.BULStaff;
+import entities.DTOStaff;
 
 /**
  *
  * @author aboyb
  */
 public class Login extends javax.swing.JFrame {
+    private DTOStaff DTOStaff;
 
     /**
      * Creates new form Login
@@ -20,9 +23,6 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
-        System.out.println(State.productState);
-        System.out.println(State.a);
-        System.out.println(State.b);
     }
 
     /**
@@ -94,13 +94,20 @@ public class Login extends javax.swing.JFrame {
 
     private void btnSubmitMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSubmitMousePressed
         // TODO add your handling code here:
-        System.out.println(txtUsername.getText());
-        System.out.println(txtPassword.getText());
+        String username  = txtUsername.getText();
+        String password = txtPassword.getText();
         
-        //TODO: check user is correct
+        BULStaff bulStaff = new BULStaff();
+        DTOStaff staff = bulStaff.getStaff(username, password);
+        if(staff != null){
+            State.currentUser = staff;
+            new IndexStaff().setVisible(true);
+            this.dispose();
+        } else {
+            
+        }
         
-        new IndexStaff().setVisible(true);
-        this.dispose();
+        
         
         
     }//GEN-LAST:event_btnSubmitMousePressed

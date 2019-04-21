@@ -31,8 +31,10 @@ create table products
 create table staffs
 (
 	id int not null IDENTITY(1,1) primary key,
-	name nvarchar(10),
-	password nvarchar(10)
+	name nvarchar(30),
+	username nvarchar(30),
+	password nvarchar(10),
+	type varchar(10)
 )
 
 create table customers
@@ -82,6 +84,12 @@ insert into categories(name)  values (N'Thức ăn nhanh')
 insert into products(id, name, price, quantity, category_id) values ('A01', N'Trà sữa trân châu', 30000, 50, 1)
 insert into products(id, name, price, quantity, category_id) values ('A02', N'Trà sữa không đường', 25000, 50, 1)
 insert into products(id, name, price, quantity, category_id) values ('B01', N'Bánh sữa', 20000, 50, 2)
+insert into products(id, name, price, quantity, category_id) values ('B02', N'Bánh đường', 20000, 50, 2)
+
+insert into staffs(name, username, password, type) values (N'Bùi Ngọc Minh', 'minhnora98', '123456', 'staff')
+insert into staffs(name, username, password, type) values (N'Trần Thị Ánh Ngọc', 'anngo98', '123456', 'staff')
+insert into staffs(name, username, password, type) values (N'Admin', 'admin', '123456', 'admin')
 
 select * from categories;
 select * from products;
+select * from staffs;
