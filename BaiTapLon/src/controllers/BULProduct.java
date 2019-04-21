@@ -6,6 +6,7 @@
 
 package controllers;
 
+import baitaplon.State;
 import entities.DTOProduct;
 import java.util.ArrayList;
 import models.DAOProduct;
@@ -17,7 +18,16 @@ import models.DAOProduct;
 public class BULProduct {
     DAOProduct daoProduct = new DAOProduct();
     
-    public ArrayList<DTOProduct> getProducts(String filter){
-        return daoProduct.List(filter);
+    public ArrayList<DTOProduct> getProducts(String filter, int limit, int offset){
+        return daoProduct.List(filter, limit, offset);
+    }
+    
+    public void calculatePage(String filter) {
+        ArrayList<DTOProduct> list = daoProduct.List(filter);
+        State.totalPages = list.size() / 6;
+            
+        if((float)list.size() / 6 > list.size() / 6){
+            State.totalPages = list.size() / 6 + 1;
+        }
     }
 }

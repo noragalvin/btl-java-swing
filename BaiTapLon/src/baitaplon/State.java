@@ -19,5 +19,5 @@ public class State {
     public static ArrayList<HashMap> currentProducts = new ArrayList<HashMap>();
     public static Database db;
     public static DTOStaff currentUser;
-    
+    public static int totalPages;
 }

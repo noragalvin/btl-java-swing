@@ -20,6 +20,8 @@ import java.util.HashMap;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -29,6 +31,8 @@ import javax.swing.border.EmptyBorder;
 public class IndexStaff extends javax.swing.JFrame {
     private ArrayList<DTOProduct> products;
     private BULProduct bulProduct = new BULProduct();
+    private int limit = 6; //number of products per page
+    private int offset = 0;
 
     /**
      * Creates new form Index
@@ -268,7 +272,7 @@ public class IndexStaff extends javax.swing.JFrame {
         int columns = 3;
         
         
-        products = bulProduct.getProducts(lblFilter.getText().toLowerCase());
+        products = bulProduct.getProducts(lblFilter.getText().toLowerCase(), limit, offset);
         
         pnList.setLayout(new GridLayout(rows, columns, -1, -1));
         Color color[] = {
@@ -296,9 +300,9 @@ public class IndexStaff extends javax.swing.JFrame {
             });
             pnList.add(p);
             
-            if(products.size() < 6 && i == products.size()-1){
+            if(products.size() < this.limit && i == products.size()-1){
                 System.out.println("out");
-                for(int j = 0; j < 6 - products.size(); j++){
+                for(int j = 0; j < this.limit - products.size(); j++){
                     System.out.println("added");
                     JPanel pn = new JPanel();
                     pnList.add(pn);
@@ -309,6 +313,24 @@ public class IndexStaff extends javax.swing.JFrame {
             //setVisible(true);
             //setDefaultCloseOperation(3);
             //setSize(400, 400);
+        }
+        initPagination();
+    }
+    
+    public void initPagination(){
+        bulProduct.calculatePage(lblFilter.getText().toLowerCase());
+        if(State.totalPages > 0){
+            int x = 5;
+            for(int i = 0; i < State.totalPages; i++){
+                
+                JLabel lbl = new JLabel(Integer.toString(i+1), SwingConstants.CENTER);
+                lbl.setBorder(BorderFactory.createLineBorder(Color.black));
+                lbl.setBounds(x, 10, 20, 20);
+                x = x + 25;
+                pnPagination.add(lbl);
+                pnPagination.repaint();
+                
+            }
         }
     }
     

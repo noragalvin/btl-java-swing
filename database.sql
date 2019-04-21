@@ -85,6 +85,9 @@ insert into products(id, name, price, quantity, category_id) values ('A01', N'Tr
 insert into products(id, name, price, quantity, category_id) values ('A02', N'Trà sữa không đường', 25000, 50, 1)
 insert into products(id, name, price, quantity, category_id) values ('B01', N'Bánh sữa', 20000, 50, 2)
 insert into products(id, name, price, quantity, category_id) values ('B02', N'Bánh đường', 20000, 50, 2)
+insert into products(id, name, price, quantity, category_id) values ('B03', N'Bánh canh', 20000, 50, 2)
+insert into products(id, name, price, quantity, category_id) values ('B04', N'Bánh cay', 20000, 50, 2)
+insert into products(id, name, price, quantity, category_id) values ('B05', N'Bánh cay hơn cái bánh trên', 20000, 50, 2)
 
 insert into staffs(name, username, password, type) values (N'Bùi Ngọc Minh', 'minhnora98', '123456', 'staff')
 insert into staffs(name, username, password, type) values (N'Trần Thị Ánh Ngọc', 'anngo98', '123456', 'staff')
@@ -93,3 +96,5 @@ insert into staffs(name, username, password, type) values (N'Admin', 'admin', '1
 select * from categories;
 select * from products;
 select * from staffs;
+
+SELECT TOP 6 products.*, categories.id as catID, categories.name as catName, categories.status as catStatusFROM products INNER JOIN categories ON products.category_id = categories.id

@@ -115,17 +115,52 @@ public class DAOProduct {
         return n;
     }
     
+    public ArrayList<DTOProduct> List(String filter, int limit, int offset) {
+        String query = "";
+        ArrayList<DTOProduct> products = new ArrayList<DTOProduct>();
+        switch(filter){
+            case "all":
+                query = String.format("SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus "
+                        + "FROM products INNER JOIN categories ON products.category_id = categories.id "
+                        + "ORDER BY id "
+                        + "OFFSET %d ROWS "
+                        + "FETCH NEXT %d ROWS ONLY;", offset, limit);
+                break;
+            default:
+                query = String.format("SELECT TOP %d products.*, categories.id as catID, categories.name as catName, categories.status as catStatus "
+                        + "FROM products INNER JOIN categories ON products.category_id = categories.id", limit);
+                break;
+        }
+        System.out.println(query);
+        ResultSet rs = db.getData(query);
+        
+        try {
+            while(rs.next()){
+                //DTOCategory cat = new DTOCategory(rs.getInt("catID"), rs.getInt("catStatus"), rs.getString("catName"));
+                DTOProduct p = new DTOProduct(rs.getString("id"), rs.getInt("quantity"), rs.getInt("status"), rs.getInt("category_id"), rs.getString("name"), rs.getDouble("price"));
+                products.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return products;
+    }
+
     public ArrayList<DTOProduct> List(String filter) {
         String query = "";
         ArrayList<DTOProduct> products = new ArrayList<DTOProduct>();
         switch(filter){
             case "all":
-                query = "SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus FROM products INNER JOIN categories ON products.category_id = categories.id";
+                query = String.format("SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus "
+                        + "FROM products INNER JOIN categories ON products.category_id = categories.id ");
                 break;
             default:
-                query = "SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus FROM products INNER JOIN categories ON products.category_id = categories.id";
+                query = String.format("SELECT TOP %d products.*, categories.id as catID, categories.name as catName, categories.status as catStatus "
+                        + "FROM products INNER JOIN categories ON products.category_id = categories.id");
                 break;
         }
+        System.out.println(query);
         ResultSet rs = db.getData(query);
         
         try {

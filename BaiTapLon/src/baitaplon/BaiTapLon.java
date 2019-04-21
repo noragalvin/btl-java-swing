@@ -21,7 +21,6 @@ public class BaiTapLon {
     public static void main(String[] args) {
         State.db = new Database();
         new Login().setVisible(true);
-        
     }
     
   
