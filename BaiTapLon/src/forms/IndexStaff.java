@@ -28,7 +28,7 @@ import javax.swing.border.EmptyBorder;
  */
 public class IndexStaff extends javax.swing.JFrame {
     private ArrayList<DTOProduct> products;
-        
+    private BULProduct bulProduct = new BULProduct();
 
     /**
      * Creates new form Index
@@ -264,10 +264,13 @@ public class IndexStaff extends javax.swing.JFrame {
 
     private void initProducts()
     {
-        BULProduct bulProduct = new BULProduct();
+        int rows = 2;
+        int columns = 3;
+        
+        
         products = bulProduct.getProducts(lblFilter.getText().toLowerCase());
-        System.out.println(products.get(0));
-        pnList.setLayout(new GridLayout(2, 3));
+        
+        pnList.setLayout(new GridLayout(rows, columns, -1, -1));
         Color color[] = {
             Color.white,
             Color.black,
@@ -278,7 +281,7 @@ public class IndexStaff extends javax.swing.JFrame {
         };
         for(int i = 0; i < products.size(); i++)
         {
-            JPanel p = new JPanel();
+            final JPanel p = new JPanel();
             p.setName("product-"+i);
             //p.setBackground(color[i]);
             p.setBorder(BorderFactory.createLineBorder(Color.black));
