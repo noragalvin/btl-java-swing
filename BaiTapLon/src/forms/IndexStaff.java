@@ -15,13 +15,23 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.List;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -113,7 +123,7 @@ public class IndexStaff extends javax.swing.JFrame {
         );
         pnCategoriesLayout.setVerticalGroup(
             pnCategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 332, Short.MAX_VALUE)
+            .addGap(0, 465, Short.MAX_VALUE)
         );
 
         jButton1.setText("Exit");
@@ -168,7 +178,7 @@ public class IndexStaff extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFilter)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSearch)
@@ -293,12 +303,29 @@ public class IndexStaff extends javax.swing.JFrame {
         {
             final DTOProduct product = products.get(i);
             final JPanel p = new JPanel();
+            p.setLayout(new GridLayout(3, 1));
             //p.setName("product-"+i);
             //p.setBackground(color[i]);
             p.setBorder(BorderFactory.createLineBorder(Color.black));
             
             JLabel lbl = new JLabel(products.get(i).getName());
-            p.add(lbl);
+            lbl.setLayout(null);
+            lbl.setHorizontalAlignment(JLabel.CENTER);
+
+            p.add(lbl); 
+            
+            
+            JLabel labelImage = new JLabel();
+            String image_url = String.format("D:\\code\\java\\BaiTapLon\\src\\forms\\pictures/%s/%s", products.get(i).getCatName() ,products.get(i).getImage());
+            labelImage.setHorizontalAlignment(JLabel.CENTER);
+            p.add(labelImage);
+            try {
+                BufferedImage image = ImageIO.read(new File(image_url));
+                ImageIcon icon = new ImageIcon(image.getScaledInstance(200, 75, image.SCALE_SMOOTH));
+                labelImage.setIcon(icon);
+            } catch (IOException ex) {
+                Logger.getLogger(IndexStaff.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             p.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent ev){
@@ -307,6 +334,11 @@ public class IndexStaff extends javax.swing.JFrame {
                     (new ProductDetails(product)).setVisible(true);
                 }
             });
+            
+            JLabel labelPrice = new JLabel("Price: " + products.get(i).getPrice());
+            labelPrice.setHorizontalAlignment(JLabel.CENTER);
+            p.add(labelPrice);
+            
             pnList.add(p);
             
             if(products.size() < this.limit && i == products.size()-1){
@@ -433,6 +465,7 @@ public class IndexStaff extends javax.swing.JFrame {
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;

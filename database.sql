@@ -76,24 +76,45 @@ create table product_bills
 
 
 
-insert into categories(name)  values (N'Starters')
-insert into categories(name)  values (N'Main')
-insert into categories(name)  values (N'Drinks')
-insert into categories(name)  values (N'Snacks')
-insert into categories(name)  values (N'Desserts')
+insert into categories(name)  values ('Chicken')
+insert into categories(name)  values ('Beef')
+insert into categories(name)  values ('Vegetable')
+insert into categories(name)  values ('Drinks')
 
-insert into products(id, name, price, quantity, category_id) values ('ST01', 'Tomato Soup', 40000, 50, 1)
-insert into products(id, name, price, quantity, category_id) values ('ST02', 'French Onion Soup', 50000, 50, 1)
-insert into products(id, name, price, quantity, category_id) values ('ST03', 'Chicken Salad', 60000, 50, 1)
+insert into products(id, name, image, price, quantity, category_id) values ('C01', 'Slow Cooker Chicken Tortilla Soup', 'slow-cooker-chicken-tortilla-soup.jpg' 40000, 50, 1)
+insert into products(id, name, image, price, quantity, category_id) values ('C02', 'Thai Chicken and Vegetable Soup', 'thai-chiken-and-vegetable-soup.jpg', 50000, 50, 1)
+insert into products(id, name, image, price, quantity, category_id) values ('C03', 'Mexican Tortilla Soup', 'mexican-tortilla-soup.jpg', 60000, 50, 1)
+insert into products(id, name, image, price, quantity, category_id) values ('C04', 'Tasty 2 Step Chicken Bake', 'tasty-2-step-chicken-bake.jpg', 60000, 50, 1)
+insert into products(id, name, image, price, quantity, category_id) values ('C05', 'Easy Chicken Pot Pie', 'easy-chicken-pot-pie.jpg', 60000, 50, 1)
+insert into products(id, name, image, price, quantity, category_id) values ('C06', 'Cheesy Chicken Enchiladas Verde', 'cheesy-chicken-enchiladas-verde.jpg', 60000, 50, 1)
+insert into products(id, name, image, price, quantity, category_id) values ('C07', 'Easy Chicken Paprika', 'easy-chicken-paprika.jpg', 60000, 50, 1)
+insert into products(id, name, image, price, quantity, category_id) values ('C08', 'Orange Picante Chicken', 'orange-picante-chicken.jpg', 60000, 50, 1)
+insert into products(id, name, image, price, quantity, category_id) values ('C09', 'Chicken Pasta Primavera', 'chicken-pasta-primavera.jpg', 60000, 50, 1)
 
-insert into products(id, name, price, quantity, category_id) values ('M01', N'Bánh đường', 20000, 50, 2)
-insert into products(id, name, price, quantity, category_id) values ('M02', N'Bánh canh', 20000, 50, 2)
-insert into products(id, name, price, quantity, category_id) values ('M03', N'Bánh cay', 20000, 50, 2)
-insert into products(id, name, price, quantity, category_id) values ('M04', N'Bánh cay hơn cái bánh trên', 20000, 50, 2)
+insert into products(id, name, image, price, quantity, category_id) values ('B01', 'Classic Lasagna', 'classic-lasagna.jpg', 20000, 50, 2)
+insert into products(id, name, image, price, quantity, category_id) values ('B02', 'Meatloaf With Roasted Garlic Potatoes', 'meatloaf-with-roasted-garlic-potatoes.jpg', 20000, 50, 2)
+insert into products(id, name, image, price, quantity, category_id) values ('B03', 'Savory Vegetable Beef Soup', 'savory-vegetable-beef-soup.jpg', 20000, 50, 2)
+insert into products(id, name, image, price, quantity, category_id) values ('B04', 'Easy Meatball Parm Hero', 'easy-meatball-parm-hero.jpg', 20000, 50, 2)
+insert into products(id, name, image, price, quantity, category_id) values ('B05', 'Italian Stuffed Meatloaf', 'italian-stuffed-meatloaf.jpg', 20000, 50, 2)
+insert into products(id, name, image, price, quantity, category_id) values ('B06', 'Beef Enchiladas', 'beef-enchiladas.jpg', 20000, 50, 2)
 
-insert into staffs(name, username, password, type) values (N'Bùi Ngọc Minh', 'minhnora98', '123456', 'staff')
-insert into staffs(name, username, password, type) values (N'Trần Thị Ánh Ngọc', 'anngo98', '123456', 'staff')
-insert into staffs(name, username, password, type) values (N'Admin', 'admin', '123456', 'admin')
+insert into products(id, name, image, price, quantity, category_id) values ('V01', 'Broccoli Rice Casserole', 'broccoli-rice-casserole.jpg', 20000, 50, 3)
+insert into products(id, name, image, price, quantity, category_id) values ('V02', 'Swiss Vegetable Bake For A Crowd', 'swiss-vegetable-bake-for-a-crowd.jpg', 20000, 50, 3)
+insert into products(id, name, image, price, quantity, category_id) values ('V03', 'Cheesy Chile Corn Casserole', 'cheesy-chile-corn-casserole.jpg', 20000, 50, 3)
+insert into products(id, name, image, price, quantity, category_id) values ('V04', 'Crowd Pleasing Vegetable Casserole', 'crowd-pleasing-vegetable-casserole.jpg', 20000, 50, 3)
+insert into products(id, name, image, price, quantity, category_id) values ('V05', 'Classic Green Bean Casserole', 'classic-green-bean-casserole.jpg', 20000, 50, 3)
+
+
+insert into products(id, name, image, price, quantity, category_id) values ('D01', 'Strawberry Mojito', 'strawberry-mojito.jpg', 20000, 50, 4)
+insert into products(id, name, image, price, quantity, category_id) values ('D02', 'Fruit Flavored Water', 'fruit-flavored-water.jpg', 20000, 50, 4)
+insert into products(id, name, image, price, quantity, category_id) values ('D03', 'Rhubarb Margarita', 'rhubarb-margarita.jpg', 20000, 50, 4)
+insert into products(id, name, image, price, quantity, category_id) values ('D04', 'Mexican Strawberry Water Agua De Fresa', 'mexican-strawberry-water-agua-de-fresa.jpg', 20000, 50, 4)
+insert into products(id, name, image, price, quantity, category_id) values ('D05', 'Peanut Butter Banana Smoothie', 'peanut-butter-banana-smoothie.jpg', 20000, 50, 4)
+
+
+insert into staffs(name, username, password, type) values ('Bui Ngoc Minh', 'minhnora98', '123456', 'staff')
+insert into staffs(name, username, password, type) values ('Tran Thi Anh Ngoc', 'ngoc98', '123456', 'staff')
+insert into staffs(name, username, password, type) values ('Admin', 'admin', 'admin', 'admin')
 
 insert into customers(name, phone, address) values ('Minh', '123456', 'Ha Noi')
 insert into customers(name, phone, address) values ('Ngoc', '654321', 'Ha Noi')

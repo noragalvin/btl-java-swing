@@ -12,7 +12,25 @@ package entities;
  */
 public class DTOProduct {
     private int quantity, status, category_id;
-    private String name, id;
+    private String name, id, image;
+    
+    private String catName;
+
+    public String getCatName() {
+        return catName;
+    }
+
+    public void setCatName(String catName) {
+        this.catName = catName;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
     private double price;
 
     public String getId() {
@@ -66,13 +84,25 @@ public class DTOProduct {
     public DTOProduct() {
     }
 
-    public DTOProduct(String id, int quantity, int status, int category_id, String name, double price) {
+    public DTOProduct(String id, int quantity, int status, int category_id, String name, double price, String image) {
         this.id = id;
         this.quantity = quantity;
         this.status = status;
         this.category_id = category_id;
         this.name = name;
         this.price = price;
+        this.image = image;
+    }
+    
+    public DTOProduct(String id, int quantity, int status, int category_id, String name, double price, String image, String catName) {
+        this.id = id;
+        this.quantity = quantity;
+        this.status = status;
+        this.category_id = category_id;
+        this.name = name;
+        this.price = price;
+        this.image = image;
+        this.catName = catName;
     }
 
     @Override

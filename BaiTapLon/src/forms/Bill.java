@@ -127,13 +127,14 @@ public class Bill extends javax.swing.JFrame {
     
     public void exportToPDF() {
         //print the panel to pdf
-        Document document = new Document();
+        Rectangle pagesize = new Rectangle(841, 1190);
+        Document document = new Document(pagesize);
         try {
             PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("D:\\code\\java\\Bills\\Bill.pdf"));
             document.open();
             PdfContentByte contentByte = writer.getDirectContent();
-            PdfTemplate template = contentByte.createTemplate(500, 500);
-            Graphics2D g2 = template.createGraphics(500, 500);
+            PdfTemplate template = contentByte.createTemplate(800, 800);
+            Graphics2D g2 = template.createGraphics(800, 800);
             pnBill.print(g2);
             g2.dispose();
             contentByte.addTemplate(template, 30, 300);
@@ -174,7 +175,7 @@ public class Bill extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Minh Ngọc Restaurant");
+        jLabel1.setText("Minh Ngoc Restaurant");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Bill Receipt");
@@ -213,10 +214,6 @@ public class Bill extends javax.swing.JFrame {
         pnBill.setLayout(pnBillLayout);
         pnBillLayout.setHorizontalGroup(
             pnBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBillLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(170, 170, 170))
             .addGroup(pnBillLayout.createSequentialGroup()
                 .addGroup(pnBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnBillLayout.createSequentialGroup()
@@ -245,6 +242,10 @@ public class Bill extends javax.swing.JFrame {
                         .addGap(143, 143, 143)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBillLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(152, 152, 152))
         );
         pnBillLayout.setVerticalGroup(
             pnBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
