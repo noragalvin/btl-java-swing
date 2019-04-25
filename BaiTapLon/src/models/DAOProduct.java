@@ -8,6 +8,7 @@ package models;
 
 import baitaplon.State;
 import entities.DTOCategory;
+import entities.DTOCustomer;
 import entities.DTOProduct;
 import java.awt.List;
 import java.sql.Connection;
@@ -178,6 +179,25 @@ public class DAOProduct {
         }
         
         return products;
+    }
+    
+     public DTOProduct Get(String id) {
+        String query = String.format("SELECT * FROM products WHERE id = '%s'", id);
+        
+        ResultSet rs = db.getData(query);
+        
+        try {
+            if(rs.next()){
+                //DTOCategory cat = new DTOCategory(rs.getInt("catID"), rs.getInt("catStatus"), rs.getString("catName"));
+                DTOProduct product = new DTOProduct(rs.getString("id"), rs.getInt("quantity"), rs.getInt("status"), rs.getInt("category_id"), rs.getString("name"), rs.getDouble("price"));
+                return product;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
+        return null;
     }
 
     

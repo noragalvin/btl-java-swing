@@ -152,6 +152,11 @@ public class IndexStaff extends javax.swing.JFrame {
         lblFilter.setText("All");
 
         btnOrder.setText("Order");
+        btnOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnOrderMouseClicked(evt);
+            }
+        });
 
         btnClear.setText("Reset");
 
@@ -266,6 +271,10 @@ public class IndexStaff extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void btnOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderMouseClicked
+        (new EnterCustomer()).setVisible(true);
+    }//GEN-LAST:event_btnOrderMouseClicked
 
     private final void initProducts()
     {

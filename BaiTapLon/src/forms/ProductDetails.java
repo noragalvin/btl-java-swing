@@ -23,7 +23,7 @@ public class ProductDetails extends javax.swing.JFrame {
         initComponents();
         this.product = product;
         
-        lblPrice.setText(product.getName());
+        lblName.setText(product.getName());
         lblPrice.setText(Double.toString(product.getPrice()));
         
         setLocationRelativeTo(null);

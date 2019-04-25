@@ -22,6 +22,10 @@ public class BULProduct {
         return daoProduct.List(filter, limit, offset);
     }
     
+    public DTOProduct getAProduct(String id) {
+        return daoProduct.Get(id);
+    }
+    
     public void calculatePage(String filter) {
         System.out.println(filter);
         ArrayList<DTOProduct> list = daoProduct.List(filter);

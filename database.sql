@@ -39,11 +39,10 @@ create table staffs
 
 create table customers
 (
-	id char(5) not null primary key,
+	id int not null IDENTITY(1,1) primary key,
 	name nvarchar(50),
 	address nvarchar(100),
-	phone nvarchar(12),
-	point int
+	phone nvarchar(12)
 )
 
 create table vouchers
@@ -58,7 +57,7 @@ create table bills
 (
 	id int  not null IDENTITY(1,1) primary key,
 	staff_id int foreign key references staffs(id) on update cascade,
-	customer_id char(5) foreign key references customers(id) on update cascade,
+	customer_id int foreign key references customers(id) on update cascade,
 	voucher_id  char(5) foreign key references vouchers(id) on update cascade,
 	total_prices money,
 	discount_prices money,
@@ -77,24 +76,28 @@ create table product_bills
 
 
 
-insert into categories(name)  values (N'Đồ uống')
-insert into categories(name)  values (N'Đồ ngọt')
-insert into categories(name)  values (N'Thức ăn nhanh')
+insert into categories(name)  values (N'Starters')
+insert into categories(name)  values (N'Main')
+insert into categories(name)  values (N'Drinks')
+insert into categories(name)  values (N'Snacks')
+insert into categories(name)  values (N'Desserts')
 
-insert into products(id, name, price, quantity, category_id) values ('A01', N'Trà sữa trân châu', 30000, 50, 1)
-insert into products(id, name, price, quantity, category_id) values ('A02', N'Trà sữa không đường', 25000, 50, 1)
-insert into products(id, name, price, quantity, category_id) values ('B01', N'Bánh sữa', 20000, 50, 2)
-insert into products(id, name, price, quantity, category_id) values ('B02', N'Bánh đường', 20000, 50, 2)
-insert into products(id, name, price, quantity, category_id) values ('B03', N'Bánh canh', 20000, 50, 2)
-insert into products(id, name, price, quantity, category_id) values ('B04', N'Bánh cay', 20000, 50, 2)
-insert into products(id, name, price, quantity, category_id) values ('B05', N'Bánh cay hơn cái bánh trên', 20000, 50, 2)
+insert into products(id, name, price, quantity, category_id) values ('ST01', 'Tomato Soup', 40000, 50, 1)
+insert into products(id, name, price, quantity, category_id) values ('ST02', 'French Onion Soup', 50000, 50, 1)
+insert into products(id, name, price, quantity, category_id) values ('ST03', 'Chicken Salad', 60000, 50, 1)
+
+insert into products(id, name, price, quantity, category_id) values ('M01', N'Bánh đường', 20000, 50, 2)
+insert into products(id, name, price, quantity, category_id) values ('M02', N'Bánh canh', 20000, 50, 2)
+insert into products(id, name, price, quantity, category_id) values ('M03', N'Bánh cay', 20000, 50, 2)
+insert into products(id, name, price, quantity, category_id) values ('M04', N'Bánh cay hơn cái bánh trên', 20000, 50, 2)
 
 insert into staffs(name, username, password, type) values (N'Bùi Ngọc Minh', 'minhnora98', '123456', 'staff')
 insert into staffs(name, username, password, type) values (N'Trần Thị Ánh Ngọc', 'anngo98', '123456', 'staff')
 insert into staffs(name, username, password, type) values (N'Admin', 'admin', '123456', 'admin')
 
+insert into customers(name, phone, address) values ('Minh', '123456', 'Ha Noi')
+insert into customers(name, phone, address) values ('Ngoc', '654321', 'Ha Noi')
+
 select * from categories;
 select * from products;
 select * from staffs;
-
-SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus FROM products INNER JOIN categories ON products.category_id = categories.id WHERE categories.name = N'Đồ uống'
