@@ -342,7 +342,7 @@ public class IndexStaff extends javax.swing.JFrame {
             pnList.add(p);
             
             if(products.size() < this.limit && i == products.size()-1){
-                System.out.println("out");
+                //System.out.println("out");
                 for(int j = 0; j < this.limit - products.size(); j++){
                     //System.out.println("added");
                     JPanel pn = new JPanel();

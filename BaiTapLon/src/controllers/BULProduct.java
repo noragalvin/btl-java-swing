@@ -26,6 +26,10 @@ public class BULProduct {
         return daoProduct.Get(id);
     }
     
+    public int updateQuantity(String id, int quantity) {
+        return daoProduct.updateQuantity(id, quantity);
+    }
+    
     public void calculatePage(String filter) {
         System.out.println(filter);
         ArrayList<DTOProduct> list = daoProduct.List(filter);

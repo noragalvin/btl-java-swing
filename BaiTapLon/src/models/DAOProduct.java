@@ -181,7 +181,7 @@ public class DAOProduct {
         return products;
     }
     
-     public DTOProduct Get(String id) {
+    public DTOProduct Get(String id) {
         String query = String.format("SELECT * FROM products WHERE id = '%s'", id);
         
         ResultSet rs = db.getData(query);
@@ -200,7 +200,26 @@ public class DAOProduct {
         return null;
     }
 
-    
+    public int updateQuantity(String id, int quantity) {
+        int n = 0;
+        
+        String query = "UPDATE products SET quantity = quantity - ? WHERE id = ?";
+        PreparedStatement pre;
+        
+        try {
+            pre = conn.prepareStatement(query);
+            
+            pre.setInt(1, quantity);
+            pre.setString(2, id);
+            
+            n = pre.executeUpdate();
+        } catch (SQLException ex) {
+            //Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+        
+        return n;
+    }
     
     
 }

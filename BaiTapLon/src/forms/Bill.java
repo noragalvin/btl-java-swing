@@ -7,12 +7,17 @@
 package forms;
 
 import baitaplon.State;
-import com.itextpdf.text.Document;
 import com.itextpdf.text.*;
+import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.*;
+import controllers.BULBill;
 import controllers.BULProduct;
+import controllers.BULProductBill;
+import entities.DTOBill;
 import entities.DTOCustomer;
 import entities.DTOProduct;
+import entities.DTOProductBill;
+import entities.DTOVoucher;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -33,13 +38,21 @@ import javax.swing.JTable;
 public class Bill extends javax.swing.JFrame {
     DTOCustomer customer;
     BULProduct bulProduct;
+    BULBill bulBill;
+    BULProductBill bulProductBill;
+    double totalPrices = 0;
+    DTOVoucher voucher;
+    
     /**
      * Creates new form Bill
      */
-    public Bill(DTOCustomer customer) {
+    public Bill(DTOCustomer customer, DTOVoucher voucher) {
         initComponents();
         this.customer = customer;
         this.bulProduct = new BULProduct();
+        this.bulBill = new BULBill();
+        this.bulProductBill = new BULProductBill();
+        this.voucher = voucher;
         
         setLocationRelativeTo(null);
         
@@ -50,7 +63,6 @@ public class Bill extends javax.swing.JFrame {
     
     public void initListCurrentProducts(){
         String[] headers = new String[]{"Item No:", "Name", "Quantity", "Price (VNĐ)", "Total Amount"};
-        double totalPrices = 0;
         
         
         // Add 1 because table has last row to calculate total amount
@@ -125,7 +137,7 @@ public class Bill extends javax.swing.JFrame {
         
     }
     
-    public void exportToPDF() {
+    public int exportToPDF() {
         //print the panel to pdf
         Rectangle pagesize = new Rectangle(841, 1190);
         Document document = new Document(pagesize);
@@ -140,11 +152,14 @@ public class Bill extends javax.swing.JFrame {
             contentByte.addTemplate(template, 30, 300);
         } catch (Exception e) {
             e.printStackTrace();
+            return 0;
         }
         finally{
+            setVisible(false);
             if(document.isOpen()){
                 document.close();
             }
+            return 1;
         }
     }
 
@@ -307,9 +322,54 @@ public class Bill extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrintMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrintMouseClicked
-        exportToPDF();
+        double discount_prices = totalPrices - totalPrices * (100 - voucher.getDiscount_percent());
+        DTOBill b = new DTOBill(State.currentUser.getId(), customer.getId(), voucher.getId(), totalPrices, 0);
+        int billResult = bulBill.Insert(b);
+        System.out.println(billResult);
+        if(billResult > 0) {
+            DTOBill lastBill = bulBill.GetLastRecord();
+            System.out.println("last bill");
+            System.out.println(lastBill);
+            Iterator iterator = State.currentProducts.entrySet().iterator();
+
+            while (iterator.hasNext()) {
+                Map.Entry hm = (Map.Entry) iterator.next();
+                DTOProductBill db = new DTOProductBill(lastBill.getId(), (int)hm.getValue(), ((String)hm.getKey()).trim(), totalPrices - discount_prices);
+                System.out.println("db+++++++");
+                System.out.println(db);
+                bulProductBill.Insert(db);
+                //System.out.println("Key: "+hm.getKey() + " & Value: " + hm.getValue());
+            }
+            
+            if(exportToPDF() != 0 && updateProducts() != 0) {
+                System.out.println("success");
+            } else {
+                System.out.println("failed 1");
+            }
+        } else {
+            System.out.println("failed 2");
+        }
+        
+        
     }//GEN-LAST:event_btnPrintMouseClicked
 
+    
+    private int updateProducts() {
+        //WHILE LOOP & ITERATOR
+        System.out.println("While Loop:");
+        Iterator iterator = State.currentProducts.entrySet().iterator();
+
+        while (iterator.hasNext()) {
+            Map.Entry hm = (Map.Entry) iterator.next();
+            
+            int result = bulProduct.updateQuantity((String)hm.getKey(), (int)hm.getValue());
+            if(result == 0) {
+                return 0;
+            }
+            //System.out.println("Key: "+hm.getKey() + " & Value: " + hm.getValue());
+        }
+        return 1;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPrint;

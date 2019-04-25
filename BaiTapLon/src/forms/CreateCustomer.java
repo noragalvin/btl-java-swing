@@ -6,11 +6,15 @@
 
 package forms;
 
+import controllers.BULCustomer;
+import entities.DTOCustomer;
+
 /**
  *
  * @author aboyb
  */
 public class CreateCustomer extends javax.swing.JFrame {
+    BULCustomer bulCustomer;
 
     /**
      * Creates new form CreateCustomer
@@ -18,6 +22,8 @@ public class CreateCustomer extends javax.swing.JFrame {
     public CreateCustomer() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        bulCustomer = new BULCustomer();
     }
 
     /**
@@ -129,6 +135,14 @@ public class CreateCustomer extends javax.swing.JFrame {
         String name = txtName.getText();
         String address = txtAddress.getText();
         String phone = txtPhone.getText();
+        DTOCustomer c = new DTOCustomer(name, address, phone);
+        int result = bulCustomer.Insert(c);
+        if(result == 1) {
+            System.out.println("success");
+            setVisible(false);
+        } else {
+            System.out.println("false");
+        }
     }//GEN-LAST:event_btnSubmitMouseClicked
 
     /**

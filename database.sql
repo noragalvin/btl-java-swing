@@ -61,7 +61,6 @@ create table bills
 	voucher_id  char(5) foreign key references vouchers(id) on update cascade,
 	total_prices money,
 	discount_prices money,
-	total_people int,
 	created_at datetime
 )
 
@@ -81,7 +80,7 @@ insert into categories(name)  values ('Beef')
 insert into categories(name)  values ('Vegetable')
 insert into categories(name)  values ('Drinks')
 
-insert into products(id, name, image, price, quantity, category_id) values ('C01', 'Slow Cooker Chicken Tortilla Soup', 'slow-cooker-chicken-tortilla-soup.jpg' 40000, 50, 1)
+insert into products(id, name, image, price, quantity, category_id) values ('C01', 'Slow Cooker Chicken Tortilla Soup', 'slow-cooker-chicken-tortilla-soup.jpg', 40000, 50, 1)
 insert into products(id, name, image, price, quantity, category_id) values ('C02', 'Thai Chicken and Vegetable Soup', 'thai-chiken-and-vegetable-soup.jpg', 50000, 50, 1)
 insert into products(id, name, image, price, quantity, category_id) values ('C03', 'Mexican Tortilla Soup', 'mexican-tortilla-soup.jpg', 60000, 50, 1)
 insert into products(id, name, image, price, quantity, category_id) values ('C04', 'Tasty 2 Step Chicken Bake', 'tasty-2-step-chicken-bake.jpg', 60000, 50, 1)
@@ -119,6 +118,41 @@ insert into staffs(name, username, password, type) values ('Admin', 'admin', 'ad
 insert into customers(name, phone, address) values ('Minh', '123456', 'Ha Noi')
 insert into customers(name, phone, address) values ('Ngoc', '654321', 'Ha Noi')
 
+insert into vouchers values('V01', 'HANOI2019', 20, 1)
+insert into vouchers values('V02', 'FIGHTING', 50, 1)
+insert into vouchers values('V03', 'FREE', 30, 1)
+
 select * from categories;
 select * from products;
 select * from staffs;
+
+
+go
+create trigger trg_update_quantity_products on products
+for update
+as
+	begin
+		declare @before int
+		declare @after int
+		select @before = quantity from deleted
+		select @after = quantity from inserted
+		if (@before <> @after)
+			begin
+				if (@after < 0)
+					begin
+						RAISERROR ('The quantity must be higher than 0.' ,16,1)
+						ROLLBACK TRANSACTION
+					end
+			end
+		update products set quantity = quantity
+	end
+go
+
+--update products set quantity = quantity - 50 where id = 'B01'
+
+--SELECT TOP 1 * FROM bills ORDER BY id DESC
+
+select * from bills
+select * from product_bills
+select * from vouchers
+

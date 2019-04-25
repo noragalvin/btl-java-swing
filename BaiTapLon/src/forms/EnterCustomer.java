@@ -7,7 +7,9 @@
 package forms;
 
 import controllers.BULCustomer;
+import controllers.BULVoucher;
 import entities.DTOCustomer;
+import entities.DTOVoucher;
 
 /**
  *
@@ -17,7 +19,9 @@ public class EnterCustomer extends javax.swing.JFrame {
     
     BULCustomer bulCustomer = new BULCustomer();
     DTOCustomer customer;
-
+    DTOVoucher voucher;
+    BULVoucher bulVoucher = new BULVoucher();
+    
     /**
      * Creates new form EnterCustomer
      */
@@ -148,7 +152,18 @@ public class EnterCustomer extends javax.swing.JFrame {
 
     private void btnSeeBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeeBillMouseClicked
         setVisible(false);
-        (new Bill(customer)).setVisible(true);
+        if(txtVoucher.getText() != "") {
+            DTOVoucher v = bulVoucher.Get(txtVoucher.getText());
+            if(v != null) {
+                this.voucher = v;
+            } else {
+                this.voucher = new DTOVoucher(1, 0, "", "");
+            }
+        } else {
+            this.voucher = new DTOVoucher(1, 0, "", "");
+        }
+        
+        (new Bill(customer, voucher)).setVisible(true);
     }//GEN-LAST:event_btnSeeBillMouseClicked
 
     /**
