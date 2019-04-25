@@ -119,7 +119,7 @@ public class DAOProduct {
         String query = "";
         ArrayList<DTOProduct> products = new ArrayList<DTOProduct>();
         switch(filter){
-            case "all":
+            case "All":
                 query = String.format("SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus "
                         + "FROM products INNER JOIN categories ON products.category_id = categories.id "
                         + "ORDER BY id "
@@ -127,11 +127,15 @@ public class DAOProduct {
                         + "FETCH NEXT %d ROWS ONLY;", offset, limit);
                 break;
             default:
-                query = String.format("SELECT TOP %d products.*, categories.id as catID, categories.name as catName, categories.status as catStatus "
-                        + "FROM products INNER JOIN categories ON products.category_id = categories.id", limit);
+                query = String.format("SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus "
+                        + "FROM products INNER JOIN categories ON products.category_id = categories.id "
+                        + "WHERE categories.name = N'%s' "
+                        + "ORDER BY id "
+                        + "OFFSET %d ROWS "
+                        + "FETCH NEXT %d ROWS ONLY;", filter, offset, limit);
                 break;
         }
-        System.out.println(query);
+        //System.out.println(query);
         ResultSet rs = db.getData(query);
         
         try {
@@ -151,13 +155,13 @@ public class DAOProduct {
         String query = "";
         ArrayList<DTOProduct> products = new ArrayList<DTOProduct>();
         switch(filter){
-            case "all":
+            case "All":
                 query = String.format("SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus "
                         + "FROM products INNER JOIN categories ON products.category_id = categories.id ");
                 break;
             default:
-                query = String.format("SELECT TOP %d products.*, categories.id as catID, categories.name as catName, categories.status as catStatus "
-                        + "FROM products INNER JOIN categories ON products.category_id = categories.id");
+                query = String.format("SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus "
+                        + "FROM products INNER JOIN categories ON products.category_id = categories.id WHERE categories.name = N'%s'", filter);
                 break;
         }
         System.out.println(query);

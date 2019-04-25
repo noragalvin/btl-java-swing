@@ -23,9 +23,16 @@ public class BULProduct {
     }
     
     public void calculatePage(String filter) {
+        System.out.println(filter);
         ArrayList<DTOProduct> list = daoProduct.List(filter);
+        System.out.println(list.size());
+        System.out.println(State.totalPages);
         State.totalPages = list.size() / 6;
+        System.out.println(State.totalPages);
             
+        if(list.size() < 6) {
+            State.totalPages = 1;
+        }
         if((float)list.size() / 6 > list.size() / 6){
             State.totalPages = list.size() / 6 + 1;
         }

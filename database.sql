@@ -97,3 +97,4 @@ select * from categories;
 select * from products;
 select * from staffs;
 
+SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus FROM products INNER JOIN categories ON products.category_id = categories.id WHERE categories.name = N'Đồ uống'

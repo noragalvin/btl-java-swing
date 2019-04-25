@@ -7,10 +7,13 @@
 package models;
 
 import baitaplon.State;
+import entities.DTOCategory;
+import entities.DTOProduct;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,5 +50,26 @@ public class DAOCategory {
         }
         
         return n;
+    }
+    
+    public ArrayList<DTOCategory> List() {
+        String query = "";
+        ArrayList<DTOCategory> categories = new ArrayList<DTOCategory>();
+
+        query = String.format("SELECT * FROM categories WHERE status = 1");
+        
+        ResultSet rs = db.getData(query);
+        
+        try {
+            while(rs.next()){
+                //DTOCategory cat = new DTOCategory(rs.getInt("catID"), rs.getInt("catStatus"), rs.getString("catName"));
+                DTOCategory c = new DTOCategory(rs.getInt("id"), rs.getInt("status"), rs.getString("name"));
+                categories.add(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return categories;
     }
 }
