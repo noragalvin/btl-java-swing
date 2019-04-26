@@ -107,8 +107,18 @@ public class DTOProduct {
         this.image = image;
     }
     
-    public DTOProduct(int quantity, int category_id, String name, double price, String image) {
+    public DTOProduct(int quantity, int category_id, String name, double price, String image, int status) {
         this.quantity = quantity;
+        this.category_id = category_id;
+        this.name = name;
+        this.price = price;
+        this.image = image;
+        this.status = status;
+    }
+    
+    public DTOProduct(String id, int quantity, int category_id, String name, double price, String image) {
+        this.quantity = quantity;
+        this.id = id;
         this.category_id = category_id;
         this.name = name;
         this.price = price;

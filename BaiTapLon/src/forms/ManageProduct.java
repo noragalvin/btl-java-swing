@@ -43,8 +43,6 @@ public class ManageProduct extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         loadData();
         loadCategories();
-        
-        
     }
     
     public void loadData() {
@@ -270,7 +268,8 @@ public class ManageProduct extends javax.swing.JFrame {
         int category_id = ((ComboItem)item).getValue();
         double price = Double.parseDouble(txtPrice.getText());
         String image = txtAvatar.getText();
-        DTOProduct p = new DTOProduct(quantity, category_id, name, price, image);
+        String id = txtID.getText();
+        DTOProduct p = new DTOProduct(id, quantity, category_id, name, price, image);
         int result = bulProduct.Add(p);
         if(result > 0) {
             System.out.println("success");
@@ -281,16 +280,21 @@ public class ManageProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
-//        int id = txtID.getText();
-//        String name = txtName.getText();
-//        DTOProduct c = new DTOProduct(id, name);
-//        int result = bulProduct.Update(c);
-//        if(result > 0) {
-//            System.out.println("success");
-//            loadData();
-//        } else {
-//            System.out.println("false");
-//        }
+        String name = txtName.getText();
+        int quantity = Integer.parseInt(txtQuantity.getText());
+        Object item = cmbCategory.getSelectedItem();
+        int category_id = ((ComboItem)item).getValue();
+        double price = Double.parseDouble(txtPrice.getText());
+        String image = txtAvatar.getText();
+        String id = txtID.getText();
+        DTOProduct p = new DTOProduct(id, quantity, category_id, name, price, image);
+        int result = bulProduct.Update(p);
+        if(result > 0) {
+            System.out.println("success");
+            loadData();
+        } else {
+            System.out.println("false");
+        }
     }//GEN-LAST:event_btnEditMouseClicked
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked

@@ -53,4 +53,8 @@ public class BULProduct {
     public int ToggleStatus(DTOProduct p){
         return daoProduct.ToggleStatus(p);
     }
+    
+    public int Update(DTOProduct p) {
+        return daoProduct.Update(p);
+    }
 }

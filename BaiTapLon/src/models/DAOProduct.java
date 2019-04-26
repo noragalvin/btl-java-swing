@@ -51,8 +51,9 @@ public class DAOProduct {
     
     // Cach 2
     public int Add(DTOProduct p){
+        System.out.println(p);
         int n = 0;
-        String query = "insert into products(id, name, price, quantity, category_id) values (?, ?, ?, ?, ?)";
+        String query = "insert into products(id, name, price, quantity, category_id, image) values (?, ?, ?, ?, ?, ?)";
         PreparedStatement pre;
         try {
             pre = conn.prepareStatement(query);
@@ -62,6 +63,7 @@ public class DAOProduct {
             pre.setDouble(3, p.getPrice());
             pre.setInt(4, p.getQuantity());
             pre.setInt(5, p.getCategory_id());
+            pre.setString(6, p.getImage());
             
             n = pre.executeUpdate();
         } catch (SQLException ex) {
@@ -72,8 +74,8 @@ public class DAOProduct {
     
     public int Update(DTOProduct p) {
         int n = 0;
-        
-        String query = "UPDATE Product SET name = ?, price = ?, quantity = ?, category_id = ? WHERE id = ?";
+        System.out.println(p);
+        String query = "UPDATE products SET name = ?, price = ?, quantity = ?, category_id = ?, image = ? WHERE id = ?";
         PreparedStatement pre;
         
         try {
@@ -83,7 +85,8 @@ public class DAOProduct {
             pre.setDouble(2, p.getPrice());
             pre.setInt(3, p.getQuantity());
             pre.setInt(4, p.getCategory_id());
-            pre.setString(5, p.getId());
+            pre.setString(5, p.getImage());
+            pre.setString(6, p.getId());
             
             n = pre.executeUpdate();
         } catch (SQLException ex) {
@@ -96,7 +99,7 @@ public class DAOProduct {
     public int ToggleStatus(DTOProduct p){
         int n = 0;
         
-        String query = "UPDATE Product SET status = 1 - status WHERE id = ?";
+        String query = "UPDATE products SET status = 1 - status WHERE id = ?";
         PreparedStatement pre;
         
         try {
@@ -119,6 +122,7 @@ public class DAOProduct {
             case "All":
                 query = String.format("SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus "
                         + "FROM products INNER JOIN categories ON products.category_id = categories.id "
+                        + "WHERE products.status = 1 "
                         + "ORDER BY id "
                         + "OFFSET %d ROWS "
                         + "FETCH NEXT %d ROWS ONLY;", offset, limit);

@@ -155,5 +155,5 @@ go
 select * from bills
 select * from product_bills
 select * from vouchers
-select * from categories;
+select * from categories
 
