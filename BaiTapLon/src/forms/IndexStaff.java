@@ -66,6 +66,7 @@ public class IndexStaff extends javax.swing.JFrame {
 
         lblName.setText("Hi, " + State.currentUser.getName());
         pnContent.setBorder(new EmptyBorder(10, 10, 10, 10));
+        
     }
 
     /**
@@ -169,6 +170,11 @@ public class IndexStaff extends javax.swing.JFrame {
         });
 
         btnClear.setText("Reset");
+        btnClear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnClearMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnSearchLayout = new javax.swing.GroupLayout(pnSearch);
         pnSearch.setLayout(pnSearchLayout);
@@ -285,6 +291,10 @@ public class IndexStaff extends javax.swing.JFrame {
     private void btnOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderMouseClicked
         (new EnterCustomer()).setVisible(true);
     }//GEN-LAST:event_btnOrderMouseClicked
+
+    private void btnClearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearMouseClicked
+        State.ResetProduct();
+    }//GEN-LAST:event_btnClearMouseClicked
 
     private final void initProducts()
     {

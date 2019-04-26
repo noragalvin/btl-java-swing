@@ -83,11 +83,32 @@ public class DTOProduct {
 
     public DTOProduct() {
     }
+    
+    public DTOProduct(String id) {
+        this.id = id;
+    }
 
     public DTOProduct(String id, int quantity, int status, int category_id, String name, double price, String image) {
         this.id = id;
         this.quantity = quantity;
         this.status = status;
+        this.category_id = category_id;
+        this.name = name;
+        this.price = price;
+        this.image = image;
+    }
+    
+    public DTOProduct(int quantity, int status, int category_id, String name, double price, String image) {
+        this.quantity = quantity;
+        this.status = status;
+        this.category_id = category_id;
+        this.name = name;
+        this.price = price;
+        this.image = image;
+    }
+    
+    public DTOProduct(int quantity, int category_id, String name, double price, String image) {
+        this.quantity = quantity;
         this.category_id = category_id;
         this.name = name;
         this.price = price;
@@ -104,6 +125,8 @@ public class DTOProduct {
         this.image = image;
         this.catName = catName;
     }
+    
+    
 
     @Override
     public String toString() {

@@ -10,6 +10,7 @@ import baitaplon.State;
 import entities.DTOCategory;
 import entities.DTOProduct;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -31,22 +32,58 @@ public class DAOCategory {
     }
     
     
-    public int Remove(int id) {
+    // Cach 2
+    public int Add(DTOCategory c){
+        int n = 0;
+        String query = "insert into categories(name) values (?)";
+        PreparedStatement pre;
+        try {
+            pre = conn.prepareStatement(query);
+            
+            pre.setString(1, c.getName());
+            
+            n = pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n;
+    }
+    
+    public int Update(DTOCategory c) {
         int n = 0;
         
-        String query = "DELETE  from categories WHERE id = "+ id;
-        String queryJoin = "SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus FROM products INNER JOIN categories ON products.category_id = categories.id";
-        ResultSet rsJoin = db.getData(queryJoin);
+        String query = "UPDATE categories SET name = ? WHERE id = ?";
+        PreparedStatement pre;
+        
         try {
-            if(rsJoin.next()){
-                System.out.println("cant delete, update status");
-                // update status categories
-            } else {
-                Statement state = conn.createStatement();
-                n = state.executeUpdate(query);
-            }
+            pre = conn.prepareStatement(query);
+            
+            pre.setString(1, c.getName());
+            pre.setInt(2, c.getId());
+
+            
+            n = pre.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return n;
+    }
+    
+    public int ToggleStatus(DTOCategory c){
+        int n = 0;
+                
+        String query = "UPDATE categories SET status = 1 - status WHERE id = ?";
+        PreparedStatement pre;
+        
+        try {
+            pre = conn.prepareStatement(query);
+            
+            pre.setInt(1, c.getId());
+            
+            n = pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return n;
@@ -71,5 +108,25 @@ public class DAOCategory {
         }
         
         return categories;
+    }
+    
+    public DTOCategory Get(int id) {
+        String query = String.format("SELECT * FROM categories WHERE id = %d", id);
+        System.out.println(query);
+        
+        ResultSet rs = db.getData(query);
+        
+        try {
+            if(rs.next()){
+                //DTOCategory cat = new DTOCategory(rs.getInt("catID"), rs.getInt("catStatus"), rs.getString("catName"));
+                DTOCategory category = new DTOCategory(rs.getInt("id"), rs.getInt("status"), rs.getString("name"));
+                return category;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
+        return null;
     }
 }

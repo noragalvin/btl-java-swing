@@ -23,4 +23,20 @@ public class BULCategory {
     public ArrayList<DTOCategory> getCategories(){
         return daoCategory.List();
     }
+    
+    public int Add(DTOCategory c){
+        return daoCategory.Add(c);
+    }
+    
+    public int Update(DTOCategory c){
+        return daoCategory.Update(c);
+    }
+    
+    public int ToggleStatus(DTOCategory c){
+        return daoCategory.ToggleStatus(c);
+    }
+    
+    public DTOCategory Get(int id) {
+        return daoCategory.Get(id);
+    }
 }

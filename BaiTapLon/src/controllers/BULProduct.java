@@ -45,4 +45,12 @@ public class BULProduct {
             State.totalPages = list.size() / 6 + 1;
         }
     }
+    
+    public int Add(DTOProduct p){
+        return daoProduct.Add(p);
+    }
+    
+    public int ToggleStatus(DTOProduct p){
+        return daoProduct.ToggleStatus(p);
+    }
 }

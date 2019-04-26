@@ -35,4 +35,15 @@ public class State {
             currentProducts.put(p.getId(), quantity);
         }
     }
+    
+    public static void ResetAll() {
+        currentProducts = new HashMap<String, Integer>();
+        db = null;
+        currentUser = null;
+        totalPages = 0;
+    }
+    
+    public static void ResetProduct() {
+        currentProducts = new HashMap<String, Integer>();
+    }
 }

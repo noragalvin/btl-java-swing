@@ -55,4 +55,11 @@ public class DTOVoucher {
     public void setCode(String code) {
         this.code = code;
     }
+
+    @Override
+    public String toString() {
+        return "DTOVoucher{" + "status=" + status + ", discount_percent=" + discount_percent + ", id=" + id + ", code=" + code + '}';
+    }
+    
+    
 }

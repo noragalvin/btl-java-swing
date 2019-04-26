@@ -66,7 +66,7 @@ public class Bill extends javax.swing.JFrame {
         
         
         // Add 1 because table has last row to calculate total amount
-        int totalOrderProducts = State.currentProducts.size() + 1;
+        int totalOrderProducts = State.currentProducts.size() + 2;
         int columns = 5;
         String data[][] = new String[totalOrderProducts][columns];
         
@@ -102,10 +102,17 @@ public class Bill extends javax.swing.JFrame {
         }
         
         // Total
-        data[i][3] = "TOTAL";
+        data[i][3] = "DISCOUNT";
+
+        double discount = totalPrices - totalPrices * (double)(100 - voucher.getDiscount_percent())/100;
+        // Total
+        data[i][4] = Double.toString(discount);
+        
+        // Total
+        data[i+1][3] = "TOTAL";
 
         // Total
-        data[i][4] = Double.toString(totalPrices);
+        data[i+1][4] = Double.toString(totalPrices - discount);
         
         JTable table = new JTable(data,headers);
         table.setFont(new Font("Serif", Font.PLAIN, 14));
@@ -322,8 +329,10 @@ public class Bill extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrintMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrintMouseClicked
-        double discount_prices = totalPrices - totalPrices * (100 - voucher.getDiscount_percent());
-        DTOBill b = new DTOBill(State.currentUser.getId(), customer.getId(), voucher.getId(), totalPrices, 0);
+        double discount_prices = totalPrices - totalPrices * (double)(100 - voucher.getDiscount_percent())/100;
+        System.out.println("discount prices");
+        System.out.println(discount_prices);
+        DTOBill b = new DTOBill(State.currentUser.getId(), customer.getId(), voucher.getId(), totalPrices, discount_prices);
         int billResult = bulBill.Insert(b);
         System.out.println(billResult);
         if(billResult > 0) {

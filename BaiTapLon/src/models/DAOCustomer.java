@@ -51,7 +51,7 @@ public class DAOCustomer {
     
     public int Insert(DTOCustomer c){
         int n = 0;
-        String query = String.format("insert into customer(name, address, phone) values (N'%s', N'%s', '%s')", c.getName(), c.getAddress(), c.getPhone());
+        String query = String.format("insert into customers(name, address, phone) values (N'%s', N'%s', '%s')", c.getName(), c.getAddress(), c.getPhone());
         try {
             Statement state = conn.createStatement();
             n = state.executeUpdate(query);

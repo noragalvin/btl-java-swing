@@ -96,17 +96,13 @@ public class DAOProduct {
     public int ToggleStatus(DTOProduct p){
         int n = 0;
         
-        // Toggle 1 to 0 and 0 to 1
-        p.setStatus(1 - p.getStatus());
-        
-        String query = "UPDATE Product SET status = ? WHERE id = ?";
+        String query = "UPDATE Product SET status = 1 - status WHERE id = ?";
         PreparedStatement pre;
         
         try {
             pre = conn.prepareStatement(query);
             
-            pre.setInt(1, p.getStatus());
-            pre.setString(2, p.getId());
+            pre.setString(1, p.getId());
             
             n = pre.executeUpdate();
         } catch (SQLException ex) {

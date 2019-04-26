@@ -46,6 +46,19 @@ public class DTOCategory {
         this.status = status;
         this.name = name;
     }
+    
+    public DTOCategory(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    public DTOCategory(String name) {
+        this.name = name;
+    }
+    
+    public DTOCategory(int id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
