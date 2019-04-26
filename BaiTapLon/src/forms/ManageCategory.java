@@ -110,6 +110,11 @@ public class ManageCategory extends javax.swing.JFrame {
                 "ID", "Name"
             }
         ));
+        tblData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDataMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblData);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -229,6 +234,20 @@ public class ManageCategory extends javax.swing.JFrame {
         dtm.setRowCount(0);
         dtm.addRow(new Object[] {category.getId(), category.getName()});
     }//GEN-LAST:event_btnSearchMouseClicked
+
+    private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
+        // get the model from the jtable
+        DefaultTableModel model = (DefaultTableModel)tblData.getModel();
+
+        // get the selected row index
+        int selectedRowIndex = tblData.getSelectedRow();
+       
+        // set the selected row data into jtextfields
+        txtID.setText(model.getValueAt(selectedRowIndex, 0).toString());
+        txtName.setText(model.getValueAt(selectedRowIndex, 1).toString());
+       
+       
+    }//GEN-LAST:event_tblDataMouseClicked
 
     /**
      * @param args the command line arguments

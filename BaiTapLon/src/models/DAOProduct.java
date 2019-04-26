@@ -29,7 +29,7 @@ public class DAOProduct {
     Connection conn;
 
     public DAOProduct() {
-        this.db = State.db;
+        this.db = new Database();
         conn = db.getConnection();
     }
     
