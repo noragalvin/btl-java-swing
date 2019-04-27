@@ -48,10 +48,10 @@ create table customers
 
 create table vouchers
 (
-	id char(5) not null primary key,
+	id int not null IDENTITY(1,1) primary key,
 	code varchar(20),
 	discount_percent int,
-	status bit
+	status bit default 1
 )
 
 create table bills
@@ -59,7 +59,7 @@ create table bills
 	id int  not null IDENTITY(1,1) primary key,
 	staff_id int foreign key references staffs(id) on update cascade,
 	customer_id int foreign key references customers(id) on update cascade,
-	voucher_id  char(5) foreign key references vouchers(id) on update cascade,
+	voucher_id  int foreign key references vouchers(id) on update cascade,
 	total_prices money,
 	discount_prices money,
 	created_at datetime
@@ -118,10 +118,12 @@ insert into staffs(name, username, password, type) values ('Admin', 'admin', 'ad
 
 insert into customers(name, phone, address) values ('Minh', '123456', 'Ha Noi')
 insert into customers(name, phone, address) values ('Ngoc', '654321', 'Ha Noi')
+insert into customers(name, phone, address) values ('Bui', '1654321', 'Ha Noi')
 
-insert into vouchers values('V01', 'HANOI2019', 20, 1)
-insert into vouchers values('V02', 'FIGHTING', 50, 1)
-insert into vouchers values('V03', 'FREE', 30, 1)
+
+insert into vouchers values('HANOI2019', 20, 1)
+insert into vouchers values('FIGHTING', 50, 1)
+insert into vouchers values('FREE', 30, 1)
 
 select * from categories;
 select * from products;
@@ -158,3 +160,31 @@ select * from product_bills
 select * from vouchers
 select * from categories
 select * from customers
+
+
+insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(1, 1, 50000, 10, '2019-04-26')
+insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(2, 2, 60000, 10, '2019-04-25')
+insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(1, 1, 70000, 10, '2019-04-24')
+insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(2, 2, 80000, 10, '2019-04-23')
+insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(1, 3, 90000, 10, '2019-04-27')
+
+
+insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(2, 2, 80000, 10, '2019-03-23')
+insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(2, 2, 80000, 10, '2019-03-23')
+insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(2, 2, 80000, 10, '2019-03-22')
+insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(2, 2, 80000, 10, '2019-03-21')
+
+insert into product_bills(product_id, bill_id, product_quantity, price) values('C01', 1, 10, 50000)
+insert into product_bills(product_id, bill_id, product_quantity, price) values('C02', 2, 20, 60000)
+insert into product_bills(product_id, bill_id, product_quantity, price) values('B01', 3, 30, 70000)
+insert into product_bills(product_id, bill_id, product_quantity, price) values('B02', 4, 40, 80000)
+insert into product_bills(product_id, bill_id, product_quantity, price) values('B02', 5, 40, 80000)
+
+
+
+SET DATEFIRST 1 SELECT products.name, bills.total_prices, bills.discount_prices, bills.created_at, product_bills.product_quantity, product_bills.price FROM products INNER JOIN product_bills ON products.id = product_bills.product_id INNER JOIN bills on bills.id = product_bills.bill_id AND bills.created_at >= dateadd(day, 1-datepart(dw, getdate()), CONVERT(date,getdate())) AND bills.created_at <  dateadd(day, 8-datepart(dw, getdate()), CONVERT(date,getdate()))
+
+SET DATEFIRST 1 SELECT products.name, bills.total_prices, bills.discount_prices, bills.created_at, product_bills.product_quantity, product_bills.price FROM products INNER JOIN product_bills ON products.id = product_bills.product_id INNER JOIN bills on bills.id = product_bills.bill_id WHERE bills.created_at >= dateadd(m, datediff(m, 0, GetDate()), 0)
+  AND bills.created_at < dateadd(m, datediff(m, -1, GetDate()), 0)
+
+SET DATEFIRST 1 SELECT products.name, bills.total_prices, bills.discount_prices, bills.created_at, product_bills.product_quantity, product_bills.price FROM products INNER JOIN product_bills ON products.id = product_bills.product_id INNER JOIN bills on bills.id = product_bills.bill_id WHERE bills.created_at >= DATEADD(DAY, 0, DATEDIFF(DAY, 0, CURRENT_TIMESTAMP)) AND bills.created_at <  DATEADD(DAY, 1, DATEDIFF(DAY, 0, CURRENT_TIMESTAMP));

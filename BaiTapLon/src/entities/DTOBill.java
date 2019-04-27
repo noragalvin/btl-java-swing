@@ -11,11 +11,11 @@ package entities;
  * @author aboyb
  */
 public class DTOBill {
-    int id, staff_id, customer_id;
-    String voucher_id, created_at;
+    int id, staff_id, customer_id, voucher_id;
+    String created_at;
     double total_prices, discount_prices;
 
-    public DTOBill(int id, int staff_id, int customer_id, String voucher_id, String created_at, double total_prices, double discount_prices) {
+    public DTOBill(int id, int staff_id, int customer_id, int voucher_id, String created_at, double total_prices, double discount_prices) {
         this.id = id;
         this.staff_id = staff_id;
         this.customer_id = customer_id;
@@ -25,7 +25,7 @@ public class DTOBill {
         this.discount_prices = discount_prices;
     }
     
-    public DTOBill(int staff_id, int customer_id, String voucher_id, String created_at, double total_prices, double discount_prices) {
+    public DTOBill(int staff_id, int customer_id, int voucher_id, String created_at, double total_prices, double discount_prices) {
         this.staff_id = staff_id;
         this.customer_id = customer_id;
         this.voucher_id = voucher_id;
@@ -34,7 +34,7 @@ public class DTOBill {
         this.discount_prices = discount_prices;
     }
     
-    public DTOBill(int staff_id, int customer_id, String voucher_id, double total_prices, double discount_prices) {
+    public DTOBill(int staff_id, int customer_id, int voucher_id, double total_prices, double discount_prices) {
         this.staff_id = staff_id;
         this.customer_id = customer_id;
         this.voucher_id = voucher_id;
@@ -69,11 +69,11 @@ public class DTOBill {
         this.customer_id = customer_id;
     }
 
-    public String getVoucher_id() {
+    public int getVoucher_id() {
         return voucher_id;
     }
 
-    public void setVoucher_id(String voucher_id) {
+    public void setVoucher_id(int voucher_id) {
         this.voucher_id = voucher_id;
     }
 

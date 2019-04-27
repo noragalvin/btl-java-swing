@@ -7,6 +7,7 @@
 package controllers;
 
 import entities.DTOVoucher;
+import java.util.ArrayList;
 import models.DAOVoucher;
 
 /**
@@ -18,5 +19,29 @@ public class BULVoucher {
     
     public DTOVoucher Get(String code) {
         return daoVoucher.Get(code);
+    }
+    
+    public int Insert(DTOVoucher v){
+        return daoVoucher.Insert(v);
+    }
+    
+    public ArrayList<DTOVoucher> getVouchers(int offset, int limit){
+        return daoVoucher.List(offset, limit);
+    }
+    
+    public int Add(DTOVoucher v){
+        return daoVoucher.Insert(v);
+    }
+    
+    public int Update(DTOVoucher v){
+        return daoVoucher.Update(v);
+    }
+    
+    public int ToggleStatus(DTOVoucher v){
+        return daoVoucher.ToggleStatus(v);
+    }
+    
+    public DTOVoucher Get(int id) {
+        return daoVoucher.Get(id);
     }
 }

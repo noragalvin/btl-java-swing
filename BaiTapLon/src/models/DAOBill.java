@@ -46,8 +46,8 @@ public class DAOBill {
             
             pre.setInt(1, b.getStaff_id());
             pre.setInt(2, b.getCustomer_id());
-            if(b.getVoucher_id() != "") {
-                pre.setString(3, b.getVoucher_id());
+            if(b.getVoucher_id() != 0) {
+                pre.setInt(3, b.getVoucher_id());
             } else {
                 pre.setNull(3, java.sql.Types.VARCHAR);
             }
@@ -81,7 +81,7 @@ public class DAOBill {
         try {
             if(rs.next()){
                 DTOBill b = new DTOBill(rs.getInt("id"), rs.getInt("staff_id"),
-                        rs.getInt("customer_id"), rs.getString("voucher_id"), 
+                        rs.getInt("customer_id"), rs.getInt("voucher_id"), 
                         rs.getString("created_at"), rs.getDouble("total_prices"),
                         rs.getDouble("discount_prices"));
                 return b;

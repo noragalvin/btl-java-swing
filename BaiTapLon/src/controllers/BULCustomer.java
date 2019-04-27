@@ -27,8 +27,8 @@ public class BULCustomer {
         return daoCustomer.Insert(c);
     }
     
-    public ArrayList<DTOCustomer> getCustomers(){
-        return daoCustomer.List();
+    public ArrayList<DTOCustomer> getCustomers(int offset, int limit){
+        return daoCustomer.List(offset, limit);
     }
     
     public int Add(DTOCustomer c){

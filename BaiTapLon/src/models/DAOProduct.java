@@ -142,7 +142,8 @@ public class DAOProduct {
         try {
             while(rs.next()){
                 //DTOCategory cat = new DTOCategory(rs.getInt("catID"), rs.getInt("catStatus"), rs.getString("catName"));
-                DTOProduct p = new DTOProduct(rs.getString("id"), rs.getInt("quantity"), rs.getInt("status"), rs.getInt("category_id"), rs.getString("name"), rs.getDouble("price"), rs.getString("image"), rs.getString("catName"));
+                DTOProduct p = new DTOProduct(rs.getString("id"), rs.getInt("quantity"), rs.getInt("status"),
+                        rs.getInt("category_id"), rs.getString("name"), rs.getDouble("price"), rs.getString("image"), rs.getString("catName"));
                 products.add(p);
             }
         } catch (SQLException ex) {

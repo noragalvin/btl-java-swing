@@ -157,10 +157,10 @@ public class EnterCustomer extends javax.swing.JFrame {
             if(v != null) {
                 this.voucher = v;
             } else {
-                this.voucher = new DTOVoucher(1, 0, "", "");
+                this.voucher = new DTOVoucher(1, 0, 0, "");
             }
         } else {
-            this.voucher = new DTOVoucher(1, 0, "", "");
+            this.voucher = new DTOVoucher(1, 0, 0, "");
         }
         
         (new Bill(customer, voucher)).setVisible(true);

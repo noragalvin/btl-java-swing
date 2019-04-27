@@ -148,6 +148,31 @@ public class DAOCustomer {
         return categories;
     }
     
+    public ArrayList<DTOCustomer> List(int offset, int limit) {
+        String query = "";
+        ArrayList<DTOCustomer> categories = new ArrayList<DTOCustomer>();
+
+        query = String.format("SELECT * FROM customers "
+                        + "WHERE status = 1 "
+                        + "ORDER BY id "
+                        + "OFFSET %d ROWS "
+                        + "FETCH NEXT %d ROWS ONLY;", offset, limit);
+        
+        ResultSet rs = db.getData(query);
+        
+        try {
+            while(rs.next()){
+                //DTOCategory cat = new DTOCategory(rs.getInt("catID"), rs.getInt("catStatus"), rs.getString("catName"));
+                DTOCustomer c = new DTOCustomer(rs.getInt("id"), rs.getString("name"), rs.getString("phone"), rs.getString("address"));
+                categories.add(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return categories;
+    }
+    
     public DTOCustomer Get(int id) {
         String query = String.format("SELECT * FROM customers WHERE id = %d", id);
         System.out.println(query);
