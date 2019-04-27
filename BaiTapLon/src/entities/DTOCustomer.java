@@ -27,6 +27,14 @@ public class DTOCustomer {
         this.phone = phone;
     }
 
+    public DTOCustomer() {
+    }
+    
+    public DTOCustomer(int id) {
+        this.id = id;
+    }
+
+    
 
 
     public int getId() {

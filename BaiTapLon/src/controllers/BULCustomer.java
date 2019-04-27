@@ -6,7 +6,9 @@
 
 package controllers;
 
+import entities.DTOCategory;
 import entities.DTOCustomer;
+import java.util.ArrayList;
 import models.DAOCustomer;
 import models.DAOProduct;
 
@@ -24,4 +26,25 @@ public class BULCustomer {
     public int Insert(DTOCustomer c){
         return daoCustomer.Insert(c);
     }
+    
+    public ArrayList<DTOCustomer> getCustomers(){
+        return daoCustomer.List();
+    }
+    
+    public int Add(DTOCustomer c){
+        return daoCustomer.Add(c);
+    }
+    
+    public int Update(DTOCustomer c){
+        return daoCustomer.Update(c);
+    }
+    
+    public int ToggleStatus(DTOCustomer c){
+        return daoCustomer.ToggleStatus(c);
+    }
+    
+    public DTOCustomer Get(int id) {
+        return daoCustomer.Get(id);
+    }
+
 }

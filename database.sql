@@ -42,7 +42,8 @@ create table customers
 	id int not null IDENTITY(1,1) primary key,
 	name nvarchar(50),
 	address nvarchar(100),
-	phone nvarchar(12)
+	phone nvarchar(12),
+	status bit default 1
 )
 
 create table vouchers
@@ -156,4 +157,4 @@ select * from bills
 select * from product_bills
 select * from vouchers
 select * from categories
-
+select * from customers

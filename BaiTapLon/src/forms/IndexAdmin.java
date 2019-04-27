@@ -115,6 +115,11 @@ public class IndexAdmin extends javax.swing.JFrame {
 
         lblProduct.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblProduct.setText("Manage Products");
+        lblProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblProductMouseClicked(evt);
+            }
+        });
 
         lblAnalytics.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblAnalytics.setText("Analytics");
@@ -185,6 +190,11 @@ public class IndexAdmin extends javax.swing.JFrame {
         setVisible(false);
         (new ManageCategory()).setVisible(true);
     }//GEN-LAST:event_lblCatMouseClicked
+
+    private void lblProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProductMouseClicked
+        setVisible(false);
+        (new ManageProduct()).setVisible(true);
+    }//GEN-LAST:event_lblProductMouseClicked
 
     /**
      * @param args the command line arguments

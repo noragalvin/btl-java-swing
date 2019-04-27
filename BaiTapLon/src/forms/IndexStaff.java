@@ -326,7 +326,7 @@ public class IndexStaff extends javax.swing.JFrame {
             
             
             JLabel labelImage = new JLabel();
-            String image_url = String.format("D:\\code\\java\\BaiTapLon\\src\\forms\\pictures/%s/%s", products.get(i).getCatName() ,products.get(i).getImage());
+            String image_url = String.format("./src/forms/pictures/%s/%s", products.get(i).getCatName() ,products.get(i).getImage());
             labelImage.setHorizontalAlignment(JLabel.CENTER);
             p.add(labelImage);
             try {

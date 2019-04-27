@@ -100,9 +100,22 @@ public class Login extends javax.swing.JFrame {
         BULStaff bulStaff = new BULStaff();
         DTOStaff staff = bulStaff.getStaff(username, password);
         if(staff != null){
-            State.currentUser = staff;
-            new IndexStaff().setVisible(true);
-            this.dispose();
+            switch(staff.getType()) {
+                case "admin":
+                    State.currentUser = staff;
+                    new IndexAdmin().setVisible(true);
+                    this.dispose();
+                    break;
+                case "staff":
+                    State.currentUser = staff;
+                    new IndexStaff().setVisible(true);
+                    this.dispose();
+                    break;
+                default:
+                    State.currentUser = staff;
+                    new IndexStaff().setVisible(true);
+                    this.dispose();
+            }
         } else {
             
         }
