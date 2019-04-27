@@ -27,7 +27,7 @@ public class DAOVoucher {
     Connection conn;
 
     public DAOVoucher() {
-        this.db = new Database();
+        this.db = State.db;
         conn = db.getConnection();
     }
     

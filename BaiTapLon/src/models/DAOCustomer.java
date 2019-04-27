@@ -28,7 +28,7 @@ public class DAOCustomer {
     Connection conn;
 
     public DAOCustomer() {
-        this.db = new Database();
+        this.db = State.db;
         conn = db.getConnection();
     }
     

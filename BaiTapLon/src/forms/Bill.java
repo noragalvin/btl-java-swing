@@ -149,7 +149,7 @@ public class Bill extends javax.swing.JFrame {
         Rectangle pagesize = new Rectangle(841, 1190);
         Document document = new Document(pagesize);
         try {
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("./Bills/Bill.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("./PDF/Bill.pdf"));
             document.open();
             PdfContentByte contentByte = writer.getDirectContent();
             PdfTemplate template = contentByte.createTemplate(800, 800);

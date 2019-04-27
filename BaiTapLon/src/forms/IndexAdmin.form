@@ -156,6 +156,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Analytics"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblAnalyticsMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblStaffs">
           <Properties>
@@ -164,6 +167,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Manage Staffs"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStaffsMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCustomer">
           <Properties>
@@ -172,6 +178,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Manage Customers"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblCustomerMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblVoucher">
           <Properties>
@@ -180,6 +189,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Manage Vouchers"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblVoucherMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

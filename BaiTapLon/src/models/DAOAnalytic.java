@@ -25,7 +25,7 @@ public class DAOAnalytic {
     Connection conn;
 
     public DAOAnalytic() {
-        this.db = new Database();
+        this.db = State.db;
         conn = db.getConnection();
     }
     

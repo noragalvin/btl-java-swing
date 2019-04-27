@@ -27,7 +27,7 @@ public class DAOCategory {
     Connection conn;
 
     public DAOCategory() {
-        this.db = new Database();
+        this.db = State.db;
         conn = db.getConnection();
     }
     

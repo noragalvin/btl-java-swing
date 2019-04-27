@@ -123,15 +123,35 @@ public class IndexAdmin extends javax.swing.JFrame {
 
         lblAnalytics.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblAnalytics.setText("Analytics");
+        lblAnalytics.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAnalyticsMouseClicked(evt);
+            }
+        });
 
         lblStaffs.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblStaffs.setText("Manage Staffs");
+        lblStaffs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblStaffsMouseClicked(evt);
+            }
+        });
 
         lblCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblCustomer.setText("Manage Customers");
+        lblCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCustomerMouseClicked(evt);
+            }
+        });
 
         lblVoucher.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblVoucher.setText("Manage Vouchers");
+        lblVoucher.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblVoucherMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnContentLayout = new javax.swing.GroupLayout(pnContent);
         pnContent.setLayout(pnContentLayout);
@@ -195,6 +215,26 @@ public class IndexAdmin extends javax.swing.JFrame {
         setVisible(false);
         (new ManageProduct()).setVisible(true);
     }//GEN-LAST:event_lblProductMouseClicked
+
+    private void lblAnalyticsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnalyticsMouseClicked
+        this.dispose();
+        (new Analytics()).setVisible(true);
+    }//GEN-LAST:event_lblAnalyticsMouseClicked
+
+    private void lblVoucherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVoucherMouseClicked
+        this.dispose();
+        (new ManageVoucher()).setVisible(true);
+    }//GEN-LAST:event_lblVoucherMouseClicked
+
+    private void lblCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCustomerMouseClicked
+        this.dispose();
+        (new ManageCustomer()).setVisible(true);
+    }//GEN-LAST:event_lblCustomerMouseClicked
+
+    private void lblStaffsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStaffsMouseClicked
+        this.dispose();
+        (new ManageStaff()).setVisible(true);
+    }//GEN-LAST:event_lblStaffsMouseClicked
 
     /**
      * @param args the command line arguments
