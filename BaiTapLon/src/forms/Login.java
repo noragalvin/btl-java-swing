@@ -13,6 +13,7 @@ import entities.DTOStaff;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import models.Database;
 
 /**
  *
@@ -36,6 +37,10 @@ public class Login extends javax.swing.JFrame {
         //lblBack.setText("Back");
         lblIcon.setVerticalTextPosition(JLabel.CENTER);
         lblIcon.setHorizontalTextPosition(JLabel.RIGHT);
+        
+        if(State.db == null) {
+            State.db = new Database();
+        }
     }
 
     /**
