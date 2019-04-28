@@ -34,7 +34,8 @@ create table staffs
 	name nvarchar(30),
 	username nvarchar(30),
 	password nvarchar(10),
-	type varchar(10)
+	type varchar(10),
+	status bit default 1
 )
 
 create table customers

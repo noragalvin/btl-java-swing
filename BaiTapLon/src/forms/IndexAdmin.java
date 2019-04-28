@@ -8,6 +8,9 @@ package forms;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -16,7 +19,7 @@ import javax.swing.border.EmptyBorder;
  * @author aboyb
  */
 public class IndexAdmin extends javax.swing.JFrame {
-
+    ImageIcon imageIcon;
     /**
      * Creates new form IndexAdmin
      */
@@ -25,35 +28,91 @@ public class IndexAdmin extends javax.swing.JFrame {
         
         setLocationRelativeTo(null);
         
+        setIconLabel();
         setPaddingLabel();
+        
+        pnContent.setBackground(new Color(52, 152, 219));
+        pnHeader.setBackground(new Color(41, 128, 185));
+        lblHeader.setForeground(new Color(236, 240, 241));
     }
+    
+    private void setIconLabel() {
+        // For category
+        imageIcon = new ImageIcon(new ImageIcon("./src/images/category.png").getImage().getScaledInstance(55, 50, Image.SCALE_DEFAULT));
+        //System.out.println(Paths.get("").toAbsolutePath().toString());
+        lblCat.setIcon(imageIcon);
+        //lblBack.setText("Back");
+        lblCat.setVerticalTextPosition(JLabel.CENTER);
+        lblCat.setHorizontalTextPosition(JLabel.RIGHT);
+        
+        // For product
+        imageIcon = new ImageIcon(new ImageIcon("./src/images/food.png").getImage().getScaledInstance(55, 50, Image.SCALE_DEFAULT));
+        //System.out.println(Paths.get("").toAbsolutePath().toString());
+        lblProduct.setIcon(imageIcon);
+        //lblBack.setText("Back");
+        lblProduct.setVerticalTextPosition(JLabel.CENTER);
+        lblProduct.setHorizontalTextPosition(JLabel.RIGHT);
+        
+        // For voucher
+        imageIcon = new ImageIcon(new ImageIcon("./src/images/voucher.png").getImage().getScaledInstance(55, 50, Image.SCALE_DEFAULT));
+        //System.out.println(Paths.get("").toAbsolutePath().toString());
+        lblVoucher.setIcon(imageIcon);
+        //lblBack.setText("Back");
+        lblVoucher.setVerticalTextPosition(JLabel.CENTER);
+        lblVoucher.setHorizontalTextPosition(JLabel.RIGHT);
+        
+        // For staff
+        imageIcon = new ImageIcon(new ImageIcon("./src/images/staff.png").getImage().getScaledInstance(55, 50, Image.SCALE_DEFAULT));
+        //System.out.println(Paths.get("").toAbsolutePath().toString());
+        lblStaffs.setIcon(imageIcon);
+        //lblBack.setText("Back");
+        lblStaffs.setVerticalTextPosition(JLabel.CENTER);
+        lblStaffs.setHorizontalTextPosition(JLabel.RIGHT);
+        
+        // For customer
+        imageIcon = new ImageIcon(new ImageIcon("./src/images/customer.png").getImage().getScaledInstance(55, 50, Image.SCALE_DEFAULT));
+        //System.out.println(Paths.get("").toAbsolutePath().toString());
+        lblCustomer.setIcon(imageIcon);
+        //lblBack.setText("Back");
+        lblCustomer.setVerticalTextPosition(JLabel.CENTER);
+        lblCustomer.setHorizontalTextPosition(JLabel.RIGHT);
+        
+        // For analytic
+        imageIcon = new ImageIcon(new ImageIcon("./src/images/analytic.png").getImage().getScaledInstance(55, 50, Image.SCALE_DEFAULT));
+        //System.out.println(Paths.get("").toAbsolutePath().toString());
+        lblAnalytics.setIcon(imageIcon);
+        //lblBack.setText("Back");
+        lblAnalytics.setVerticalTextPosition(JLabel.CENTER);
+        lblAnalytics.setHorizontalTextPosition(JLabel.RIGHT);
+    }
+
     
     private void setPaddingLabel() {
         
         
         lblCat.setBorder(new EmptyBorder(10,20,10,20));//top,left,bottom,right
         lblCat.setOpaque(true);
-        lblCat.setBackground(Color.YELLOW);
+        lblCat.setBackground(new Color(241, 196, 15));
 
         lblCustomer.setBorder(new EmptyBorder(10,20,10,20));//top,left,bottom,right
         lblCustomer.setOpaque(true);
-        lblCustomer.setBackground(Color.YELLOW);
+        lblCustomer.setBackground(new Color(241, 196, 15));
 
         lblProduct.setBorder(new EmptyBorder(10,20,10,20));//top,left,bottom,right
         lblProduct.setOpaque(true);
-        lblProduct.setBackground(Color.YELLOW);
+        lblProduct.setBackground(new Color(241, 196, 15));
         
         lblVoucher.setBorder(new EmptyBorder(10,20,10,20));//top,left,bottom,right
         lblVoucher.setOpaque(true);
-        lblVoucher.setBackground(Color.YELLOW);
+        lblVoucher.setBackground(new Color(241, 196, 15));
         
         lblAnalytics.setBorder(new EmptyBorder(10,20,10,20));//top,left,bottom,right
         lblAnalytics.setOpaque(true);
-        lblAnalytics.setBackground(Color.YELLOW);
+        lblAnalytics.setBackground(new Color(241, 196, 15));
         
         lblStaffs.setBorder(new EmptyBorder(10,20,10,20));//top,left,bottom,right
         lblStaffs.setOpaque(true);
-        lblStaffs.setBackground(Color.YELLOW);
+        lblStaffs.setBackground(new Color(241, 196, 15));
 
 
     }
@@ -71,7 +130,7 @@ public class IndexAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         pnHeader = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblHeader = new javax.swing.JLabel();
         pnContent = new javax.swing.JPanel();
         lblCat = new javax.swing.JLabel();
         lblProduct = new javax.swing.JLabel();
@@ -84,27 +143,26 @@ public class IndexAdmin extends javax.swing.JFrame {
 
         pnHeader.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Admin Manager");
+        lblHeader.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblHeader.setText("Admin Manager");
 
         javax.swing.GroupLayout pnHeaderLayout = new javax.swing.GroupLayout(pnHeader);
         pnHeader.setLayout(pnHeaderLayout);
         pnHeaderLayout.setHorizontalGroup(
             pnHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnHeaderLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(334, Short.MAX_VALUE)
+                .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(327, 327, 327))
         );
         pnHeaderLayout.setVerticalGroup(
             pnHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnHeaderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addComponent(lblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        lblCat.setBackground(new java.awt.Color(255, 255, 0));
         lblCat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblCat.setText("Manage Categories");
         lblCat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -158,34 +216,34 @@ public class IndexAdmin extends javax.swing.JFrame {
         pnContentLayout.setHorizontalGroup(
             pnContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnContentLayout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addGroup(pnContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblVoucher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblCat, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
-                .addGap(105, 105, 105)
-                .addGroup(pnContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                    .addComponent(lblProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(111, 111, 111)
+                .addGap(157, 157, 157)
                 .addGroup(pnContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblAnalytics, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblStaffs, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
-                .addContainerGap(158, Short.MAX_VALUE))
+                    .addComponent(lblVoucher, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCat, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addGroup(pnContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                    .addComponent(lblStaffs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnContentLayout.setVerticalGroup(
             pnContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnContentLayout.createSequentialGroup()
-                .addGap(113, 113, 113)
+                .addGap(61, 61, 61)
                 .addGroup(pnContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCat)
-                    .addComponent(lblProduct)
-                    .addComponent(lblAnalytics))
-                .addGap(68, 68, 68)
+                    .addComponent(lblProduct))
+                .addGap(72, 72, 72)
                 .addGroup(pnContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblVoucher)
-                    .addComponent(lblCustomer)
+                    .addComponent(lblCustomer))
+                .addGap(68, 68, 68)
+                .addGroup(pnContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAnalytics)
                     .addComponent(lblStaffs))
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -199,27 +257,13 @@ public class IndexAdmin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void lblCatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCatMouseClicked
-        setVisible(false);
-        (new ManageCategory()).setVisible(true);
-    }//GEN-LAST:event_lblCatMouseClicked
-
-    private void lblProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProductMouseClicked
-        setVisible(false);
-        (new ManageProduct()).setVisible(true);
-    }//GEN-LAST:event_lblProductMouseClicked
-
-    private void lblAnalyticsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnalyticsMouseClicked
-        this.dispose();
-        (new Analytics()).setVisible(true);
-    }//GEN-LAST:event_lblAnalyticsMouseClicked
 
     private void lblVoucherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVoucherMouseClicked
         this.dispose();
@@ -235,6 +279,21 @@ public class IndexAdmin extends javax.swing.JFrame {
         this.dispose();
         (new ManageStaff()).setVisible(true);
     }//GEN-LAST:event_lblStaffsMouseClicked
+
+    private void lblAnalyticsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnalyticsMouseClicked
+        this.dispose();
+        (new Analytics()).setVisible(true);
+    }//GEN-LAST:event_lblAnalyticsMouseClicked
+
+    private void lblProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProductMouseClicked
+        setVisible(false);
+        (new ManageProduct()).setVisible(true);
+    }//GEN-LAST:event_lblProductMouseClicked
+
+    private void lblCatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCatMouseClicked
+        setVisible(false);
+        (new ManageCategory()).setVisible(true);
+    }//GEN-LAST:event_lblCatMouseClicked
 
     /**
      * @param args the command line arguments
@@ -272,10 +331,10 @@ public class IndexAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAnalytics;
     private javax.swing.JLabel lblCat;
     private javax.swing.JLabel lblCustomer;
+    private javax.swing.JLabel lblHeader;
     private javax.swing.JLabel lblProduct;
     private javax.swing.JLabel lblStaffs;
     private javax.swing.JLabel lblVoucher;

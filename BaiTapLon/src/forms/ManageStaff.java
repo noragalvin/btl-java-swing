@@ -6,17 +6,65 @@
 
 package forms;
 
+import baitaplon.Helpers;
+import controllers.BULCustomer;
+import controllers.BULStaff;
+import entities.DTOCustomer;
+import entities.DTOStaff;
+import java.awt.Color;
+import java.awt.Image;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author aboyb
  */
 public class ManageStaff extends javax.swing.JFrame {
-
+    BULStaff bulStaff = new BULStaff();
+    ArrayList<DTOStaff> staffs;
+    int limit = 10;
+    int offset = 0;
+    int currentPage = 1;
+    
     /**
      * Creates new form ManageStaff
      */
     public ManageStaff() {
         initComponents();
+        setLocationRelativeTo(null);
+        
+        loadData();
+        initIconLabel();
+        
+        getContentPane().setBackground(new Color(241, 196, 15));
+        lblHeader.setForeground(new Color(52, 73, 94));
+        lblID.setForeground(new Color(52, 73, 94));
+        lblName.setForeground(new Color(52, 73, 94));
+        lblPhone.setForeground(new Color(52, 73, 94));
+        lblAddress.setForeground(new Color(52, 73, 94));
+        lblCurrentPage.setForeground(new Color(52, 73, 94));
+    }
+    
+    public void initIconLabel(){ 
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("./src/images/back.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+        //System.out.println(Paths.get("").toAbsolutePath().toString());
+        lblBack.setIcon(imageIcon);
+        //lblBack.setText("Back");
+        lblBack.setVerticalTextPosition(JLabel.CENTER);
+        lblBack.setHorizontalTextPosition(JLabel.RIGHT);
+    }
+    
+    public void loadData() {
+        staffs = bulStaff.getStaffs(offset, limit);
+        DefaultTableModel dtm = (DefaultTableModel)tblData.getModel();
+        dtm.setRowCount(0);
+        for(DTOStaff staff: staffs) {
+            dtm.addRow(new Object[] {staff.getId(), staff.getName(), staff.getUsername(), staff.getPassword(), staff.getType()});
+        }
     }
 
     /**
@@ -28,21 +76,325 @@ public class ManageStaff extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroupType = new javax.swing.ButtonGroup();
+        lblHeader = new javax.swing.JLabel();
+        lblPhone = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
+        lblAddress = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        txtID = new javax.swing.JTextField();
+        lblName = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
+        btnAdd = new javax.swing.JButton();
+        lblPrevious = new javax.swing.JLabel();
+        btnEdit = new javax.swing.JButton();
+        lblNext = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JButton();
+        lblCurrentPage = new javax.swing.JLabel();
+        btnSearch = new javax.swing.JButton();
+        lblBack = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblData = new javax.swing.JTable();
+        lblType = new javax.swing.JLabel();
+        radAdmin = new javax.swing.JRadioButton();
+        radStaff = new javax.swing.JRadioButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblHeader.setText("Staff Manager");
+
+        lblPhone.setText("Username");
+
+        lblAddress.setText("Password");
+
+        lblName.setText("Name");
+
+        lblID.setText("ID");
+
+        btnAdd.setText("Add");
+        btnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddMouseClicked(evt);
+            }
+        });
+
+        lblPrevious.setText(" < ");
+        lblPrevious.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblPrevious.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblPreviousMouseClicked(evt);
+            }
+        });
+
+        btnEdit.setText("Edit");
+        btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditMouseClicked(evt);
+            }
+        });
+
+        lblNext.setText(" > ");
+        lblNext.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblNext.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblNextMouseClicked(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
+        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteMouseClicked(evt);
+            }
+        });
+
+        lblCurrentPage.setText("1");
+
+        btnSearch.setText("Search");
+        btnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSearchMouseClicked(evt);
+            }
+        });
+
+        lblBack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBackMouseClicked(evt);
+            }
+        });
+
+        tblData.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Name", "Username", "Password", "Type"
+            }
+        ));
+        tblData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDataMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblData);
+
+        lblType.setText("Type");
+
+        btnGroupType.add(radAdmin);
+        radAdmin.setText("Admin");
+
+        btnGroupType.add(radStaff);
+        radStaff.setText("Staff");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblBack, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAdd)
+                                .addGap(33, 33, 33)
+                                .addComponent(btnEdit))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblName)
+                                    .addComponent(lblID))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(38, 38, 38))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblType)
+                                .addGap(18, 18, 18)
+                                .addComponent(radAdmin)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(radStaff)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                                .addComponent(btnDelete)
+                                .addGap(39, 39, 39)
+                                .addComponent(btnSearch)
+                                .addGap(111, 111, 111))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblPhone)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblAddress)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblPrevious)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCurrentPage)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNext))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblHeader)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPhone)
+                            .addComponent(lblID)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblName)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAddress)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblType)
+                            .addComponent(radAdmin)
+                            .addComponent(radStaff))
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAdd)
+                            .addComponent(btnEdit)
+                            .addComponent(btnDelete)
+                            .addComponent(btnSearch)))
+                    .addComponent(lblBack, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrevious)
+                    .addComponent(lblCurrentPage)
+                    .addComponent(lblNext))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
+        String name = txtName.getText();
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        String type = "admin";
+        if (!radAdmin.isSelected()) {
+            type = "staff";
+        }
+        DTOStaff s = new DTOStaff(name, username, password, type);
+        int result = bulStaff.Add(s);
+        if(result > 0) {
+            Helpers.MessageBox("Success", "Add successfully", "success");
+            loadData();
+        } else {
+            Helpers.MessageBox("False", "Opps! Something went wrong", "error");
+        }
+    }//GEN-LAST:event_btnAddMouseClicked
+
+    private void lblPreviousMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPreviousMouseClicked
+        this.currentPage--;
+        offset = (currentPage - 1) * limit;
+        loadData();
+    }//GEN-LAST:event_lblPreviousMouseClicked
+
+    private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
+        String id = txtID.getText();
+        String name = txtName.getText();
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        String type = "admin";
+        if (!radAdmin.isSelected()) {
+            type = "staff";
+        }
+        DTOStaff s = new DTOStaff(Integer.parseInt(id),name, username, password, type);
+        int result = bulStaff.Update(s);
+        if(result > 0) {
+            Helpers.MessageBox("Success", "Edit successfully", "success");
+            loadData();
+        } else {
+            Helpers.MessageBox("False", "Opps! Something went wrong", "error");
+        }
+    }//GEN-LAST:event_btnEditMouseClicked
+
+    private void lblNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNextMouseClicked
+
+        this.currentPage++;
+        offset = (currentPage - 1) * limit;
+        loadData();
+    }//GEN-LAST:event_lblNextMouseClicked
+
+    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
+        String id = txtID.getText();
+        DTOStaff s = new DTOStaff(Integer.parseInt(id));
+        int result = bulStaff.ToggleStatus(s);
+        if(result > 0) {
+            Helpers.MessageBox("Success", "Delete Successfully", "success");
+            loadData();
+        } else {
+            Helpers.MessageBox("False", "Opps! Something went wrong", "error");
+        }
+    }//GEN-LAST:event_btnDeleteMouseClicked
+
+    private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
+        int id = Integer.parseInt(txtID.getText());
+        DTOStaff s = bulStaff.Get(id);
+        DefaultTableModel dtm = (DefaultTableModel)tblData.getModel();
+        dtm.setRowCount(0);
+        dtm.addRow(new Object[] {s.getId(), s.getName(), s.getUsername(), s.getPassword(), s.getType()});
+    }//GEN-LAST:event_btnSearchMouseClicked
+
+    private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
+        this.dispose();
+        (new IndexAdmin()).setVisible(true);
+    }//GEN-LAST:event_lblBackMouseClicked
+
+    private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
+        // get the model from the jtable
+        DefaultTableModel model = (DefaultTableModel)tblData.getModel();
+
+        // get the selected row index
+        int selectedRowIndex = tblData.getSelectedRow();
+
+        // set the selected row data into jtextfields
+        txtID.setText(model.getValueAt(selectedRowIndex, 0).toString());
+        txtName.setText(model.getValueAt(selectedRowIndex, 1).toString());
+        txtUsername.setText(model.getValueAt(selectedRowIndex, 2).toString());
+        txtPassword.setText(model.getValueAt(selectedRowIndex, 3).toString());
+        radAdmin.setSelected(true);
+        radStaff.setSelected(false);
+        String type = model.getValueAt(selectedRowIndex, 4).toString();
+        if(type.equals("staff") == true){
+            radAdmin.setSelected(false);
+            radStaff.setSelected(true);
+        }
+    }//GEN-LAST:event_tblDataMouseClicked
 
     /**
      * @param args the command line arguments
@@ -80,5 +432,28 @@ public class ManageStaff extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.ButtonGroup btnGroupType;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAddress;
+    private javax.swing.JLabel lblBack;
+    private javax.swing.JLabel lblCurrentPage;
+    private javax.swing.JLabel lblHeader;
+    private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblNext;
+    private javax.swing.JLabel lblPhone;
+    private javax.swing.JLabel lblPrevious;
+    private javax.swing.JLabel lblType;
+    private javax.swing.JRadioButton radAdmin;
+    private javax.swing.JRadioButton radStaff;
+    private javax.swing.JTable tblData;
+    private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

@@ -135,14 +135,15 @@ public class DTOProduct {
         this.image = image;
         this.catName = catName;
     }
-    
-    
 
     @Override
     public String toString() {
-        return "Product{" + "quantity=" + quantity + ", status=" + status + ", category_id=" + category_id + ", name=" + name + ", id=" + id + ", price=" + price + '}';
+        return "DTOProduct{" + "quantity=" + quantity + ", status=" + status + ", category_id=" + category_id + ", name=" + name + ", id=" + id + ", image=" + image + ", price=" + price + '}';
     }
+    
+    
 
+  
     
     
 }

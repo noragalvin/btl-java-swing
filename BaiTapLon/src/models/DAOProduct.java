@@ -222,5 +222,24 @@ public class DAOProduct {
         return n;
     }
     
-    
+    public ArrayList<DTOProduct> smartSearch(String search) {
+        String query = "SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus "
+                        + "FROM products INNER JOIN categories ON products.category_id = categories.id WHERE products.name LIKE '%"+search+"%'";
+        ArrayList<DTOProduct> products = new ArrayList<DTOProduct>();
+        System.out.println(query);
+        ResultSet rs = db.getData(query);
+        
+        try {
+            while(rs.next()){
+                //DTOCategory cat = new DTOCategory(rs.getInt("catID"), rs.getInt("catStatus"), rs.getString("catName"));
+                DTOProduct p = new DTOProduct(rs.getString("id"), rs.getInt("quantity"), rs.getInt("status"),
+                        rs.getInt("category_id"), rs.getString("name"), rs.getDouble("price"), rs.getString("image"), rs.getString("catName"));
+                products.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return products;
+    }
 }

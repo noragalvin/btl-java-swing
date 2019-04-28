@@ -6,6 +6,7 @@
 
 package forms;
 
+import baitaplon.Helpers;
 import baitaplon.State;
 import entities.DTOProduct;
 
@@ -145,6 +146,7 @@ public class ProductDetails extends javax.swing.JFrame {
     private void btnOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderMouseClicked
         int quantity = Integer.parseInt(txtQuantity.getText());
         State.AddProduct(product, quantity);
+        Helpers.MessageBox("Success", "Added 1 food", "success");
         setVisible(false);
     }//GEN-LAST:event_btnOrderMouseClicked
 

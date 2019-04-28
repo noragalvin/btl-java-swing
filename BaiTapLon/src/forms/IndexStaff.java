@@ -6,6 +6,7 @@
 
 package forms;
 
+import baitaplon.Helpers;
 import baitaplon.State;
 import controllers.BULCategory;
 import controllers.BULProduct;
@@ -15,6 +16,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -61,11 +63,31 @@ public class IndexStaff extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         initCategories();
-        initProducts();
+        products = bulProduct.getProducts(this.filter, limit, offset);
+        initProducts(products);
         
 
         lblName.setText("Hi, " + State.currentUser.getName());
         pnContent.setBorder(new EmptyBorder(10, 10, 10, 10));
+        
+        //pnContainer.setBackground(new Color(52, 152, 219));
+        pnContainer.setBackground(Helpers.mainBgColor);
+        /* Background tab */
+        pnTab.setBackground(Helpers.mainBgColor);
+        pnCurrentUser.setBackground(Helpers.mainBgColor);
+        pnCategories.setBackground(Helpers.mainBgColor);
+        /* End background tab */
+        
+        /* Background content */
+        pnContent.setBackground(Helpers.mainBgColor);
+        pnSearch.setBackground(Helpers.mainBgColor);
+        pnList.setBackground(Helpers.mainBgColor);
+        pnPagination.setBackground(Helpers.mainBgColor);
+        /* End background content */
+        
+        lblName.setForeground(Helpers.mainFgColor);
+        lblFilter.setForeground(Helpers.mainFgColor);
+        lblFilterKey.setForeground(Helpers.mainFgColor);
         
     }
 
@@ -83,12 +105,12 @@ public class IndexStaff extends javax.swing.JFrame {
         pnCurrentUser = new javax.swing.JPanel();
         lblName = new javax.swing.JLabel();
         pnCategories = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
         pnContent = new javax.swing.JPanel();
         pnSearch = new javax.swing.JPanel();
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblFilterKey = new javax.swing.JLabel();
         lblFilter = new javax.swing.JLabel();
         btnOrder = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
@@ -124,13 +146,15 @@ public class IndexStaff extends javax.swing.JFrame {
         );
         pnCategoriesLayout.setVerticalGroup(
             pnCategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 465, Short.MAX_VALUE)
+            .addGap(0, 468, Short.MAX_VALUE)
         );
 
-        jButton1.setText("Exit");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnLogout.setBackground(new java.awt.Color(230, 126, 34));
+        btnLogout.setForeground(new java.awt.Color(236, 240, 241));
+        btnLogout.setText("Logout");
+        btnLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnLogoutMouseClicked(evt);
             }
         });
 
@@ -142,7 +166,7 @@ public class IndexStaff extends javax.swing.JFrame {
             .addComponent(pnCategories, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnTabLayout.createSequentialGroup()
                 .addGap(89, 89, 89)
-                .addComponent(jButton1)
+                .addComponent(btnLogout)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnTabLayout.setVerticalGroup(
@@ -152,16 +176,25 @@ public class IndexStaff extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnCategories, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnLogout)
                 .addContainerGap())
         );
 
+        btnSearch.setBackground(new java.awt.Color(230, 126, 34));
+        btnSearch.setForeground(new java.awt.Color(236, 240, 241));
         btnSearch.setText("Search");
+        btnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSearchMouseClicked(evt);
+            }
+        });
 
-        jLabel1.setText("Filter:");
+        lblFilterKey.setText("Filter:");
 
         lblFilter.setText("All");
 
+        btnOrder.setBackground(new java.awt.Color(230, 126, 34));
+        btnOrder.setForeground(new java.awt.Color(236, 240, 241));
         btnOrder.setText("Order");
         btnOrder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -169,6 +202,8 @@ public class IndexStaff extends javax.swing.JFrame {
             }
         });
 
+        btnClear.setBackground(new java.awt.Color(230, 126, 34));
+        btnClear.setForeground(new java.awt.Color(236, 240, 241));
         btnClear.setText("Reset");
         btnClear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -181,14 +216,14 @@ public class IndexStaff extends javax.swing.JFrame {
         pnSearchLayout.setHorizontalGroup(
             pnSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnSearchLayout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(lblFilterKey)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFilter)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSearch)
-                .addGap(98, 98, 98)
+                .addGap(209, 209, 209)
                 .addComponent(btnOrder)
                 .addGap(27, 27, 27)
                 .addComponent(btnClear)
@@ -201,7 +236,7 @@ public class IndexStaff extends javax.swing.JFrame {
                 .addGroup(pnSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch)
-                    .addComponent(jLabel1)
+                    .addComponent(lblFilterKey)
                     .addComponent(lblFilter)
                     .addComponent(btnOrder)
                     .addComponent(btnClear))
@@ -283,10 +318,12 @@ public class IndexStaff extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
         // TODO add your handling code here:
-        setVisible(false);
-    }//GEN-LAST:event_jButton1MouseClicked
+        dispose();
+        State.ResetAll();
+        (new Login()).setVisible(true);
+    }//GEN-LAST:event_btnLogoutMouseClicked
 
     private void btnOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderMouseClicked
         (new EnterCustomer()).setVisible(true);
@@ -296,14 +333,19 @@ public class IndexStaff extends javax.swing.JFrame {
         State.ResetProduct();
     }//GEN-LAST:event_btnClearMouseClicked
 
-    private final void initProducts()
+    private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
+        products = bulProduct.smartSearch(txtSearch.getText());
+        System.out.println(products.get(0));
+        initProducts(products);
+    }//GEN-LAST:event_btnSearchMouseClicked
+
+    private final void initProducts(ArrayList<DTOProduct> products)
     {
         int rows = 2;
         int columns = 3;
         
         lblFilter.setText(this.filter);
-        products = bulProduct.getProducts(this.filter, limit, offset);
-        System.out.println(products);
+        //products = bulProduct.getProducts(this.filter, limit, offset);
         pnList.removeAll();
         pnList.revalidate();
         pnList.repaint();
@@ -316,12 +358,13 @@ public class IndexStaff extends javax.swing.JFrame {
             p.setLayout(new GridLayout(3, 1));
             //p.setName("product-"+i);
             //p.setBackground(color[i]);
-            p.setBorder(BorderFactory.createLineBorder(Color.black));
+            p.setBorder(BorderFactory.createLineBorder(Helpers.mainBordercolor));
             
             JLabel lbl = new JLabel(products.get(i).getName());
             lbl.setLayout(null);
+            lbl.setFont(new Font("Serif", Font.BOLD, 18));
             lbl.setHorizontalAlignment(JLabel.CENTER);
-
+            lbl.setForeground(Helpers.mainFgColor);
             p.add(lbl); 
             
             
@@ -347,8 +390,9 @@ public class IndexStaff extends javax.swing.JFrame {
             
             JLabel labelPrice = new JLabel("Price: " + products.get(i).getPrice());
             labelPrice.setHorizontalAlignment(JLabel.CENTER);
+            labelPrice.setForeground(Helpers.mainFgColor);
             p.add(labelPrice);
-            
+            p.setBackground(new Color(241, 196, 15));
             pnList.add(p);
             
             if(products.size() < this.limit && i == products.size()-1){
@@ -356,6 +400,7 @@ public class IndexStaff extends javax.swing.JFrame {
                 for(int j = 0; j < this.limit - products.size(); j++){
                     //System.out.println("added");
                     JPanel pn = new JPanel();
+                    pn.setBackground(Helpers.mainBgColor);
                     pnList.add(pn);
                 }
             }
@@ -379,7 +424,8 @@ public class IndexStaff extends javax.swing.JFrame {
                 
                 JLabel lbl = new JLabel(Integer.toString(i+1), SwingConstants.CENTER);
                 lbl.setName(String.valueOf(i+1));
-                lbl.setBorder(BorderFactory.createLineBorder(Color.black));
+                lbl.setForeground(Helpers.mainFgColor);
+                lbl.setBorder(BorderFactory.createLineBorder(Helpers.mainBordercolor));
                 lbl.setBounds(x, 10, 20, 20);
                 x = x + 25;
                 
@@ -388,7 +434,8 @@ public class IndexStaff extends javax.swing.JFrame {
                         int currentPage = Integer.parseInt(((JLabel)ev.getSource()).getName());
                         
                         offset = (currentPage - 1) * limit;
-                        initProducts();
+                        products = bulProduct.getProducts(filter, limit, offset);
+                        initProducts(products);
                         
                     }
                 });
@@ -412,12 +459,14 @@ public class IndexStaff extends javax.swing.JFrame {
         
         // Add tab all
         JLabel lblAll = new JLabel("All", JLabel.CENTER);
-        lblAll.setBorder(BorderFactory.createLineBorder(Color.black));
+        lblAll.setForeground(Helpers.mainFgColor);
+        lblAll.setBorder(BorderFactory.createLineBorder(Helpers.mainBordercolor));
         lblAll.setPreferredSize(new Dimension(100, 50));
         lblAll.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent ev){
                 filter = "All";
-                initProducts();
+                products = bulProduct.getProducts(filter, limit, offset);
+                initProducts(products);
             }
         });
         pnCategories.add(lblAll);
@@ -426,13 +475,15 @@ public class IndexStaff extends javax.swing.JFrame {
         {
             final DTOCategory category = categories.get(i);
             final JLabel l = new JLabel(categories.get(i).getName(), JLabel.CENTER);
-            l.setBorder(BorderFactory.createLineBorder(Color.black));
+            l.setForeground(Helpers.mainFgColor);
+            l.setBorder(BorderFactory.createLineBorder(Helpers.mainBordercolor));
             l.setPreferredSize(new Dimension(100, 50));
             
             l.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent ev){
                     filter = category.getName();
-                    initProducts();
+                    products = bulProduct.getProducts(filter, limit, offset);
+                    initProducts(products);
                 }
             });
             
@@ -479,11 +530,11 @@ public class IndexStaff extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnOrder;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblFilter;
+    private javax.swing.JLabel lblFilterKey;
     private javax.swing.JLabel lblName;
     private javax.swing.JPanel pnCategories;
     private javax.swing.JPanel pnContainer;

@@ -6,6 +6,7 @@
 
 package forms;
 
+import baitaplon.Helpers;
 import controllers.BULCustomer;
 import controllers.BULVoucher;
 import entities.DTOCustomer;
@@ -155,8 +156,10 @@ public class EnterCustomer extends javax.swing.JFrame {
         if(txtVoucher.getText() != "") {
             DTOVoucher v = bulVoucher.Get(txtVoucher.getText());
             if(v != null) {
+                Helpers.MessageBox("Success", "1 voucher founded", "success");
                 this.voucher = v;
             } else {
+                Helpers.MessageBox("False", "Voucher not found", "error");
                 this.voucher = new DTOVoucher(1, 0, 0, "");
             }
         } else {

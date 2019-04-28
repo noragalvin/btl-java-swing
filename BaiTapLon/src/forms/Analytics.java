@@ -6,6 +6,7 @@
 
 package forms;
 
+import baitaplon.Helpers;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfContentByte;
@@ -14,9 +15,13 @@ import com.itextpdf.text.pdf.PdfWriter;
 import controllers.BULAnalytic;
 import entities.DTOAnalytic;
 import entities.DTOProduct;
+import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -39,6 +44,14 @@ public class Analytics extends javax.swing.JFrame {
         cmbFilter.addItem(new ComboItem("Today", "Today"));
         cmbFilter.addItem(new ComboItem("Week", "Week"));
         cmbFilter.addItem(new ComboItem("Month", "Month"));
+        
+        initIconLabel();
+        
+        getContentPane().setBackground(new Color(241, 196, 15));
+        pnMain.setBackground(new Color(241, 196, 15));
+        lblHeader.setForeground(new Color(52, 73, 94));
+        lblFilter.setForeground(new Color(52, 73, 94));
+
 
     }
     
@@ -52,6 +65,15 @@ public class Analytics extends javax.swing.JFrame {
             total += ana.getPrice();
         }
         lblTotal.setText(Double.toString(total));
+    }
+    
+    public void initIconLabel(){ 
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("./src/images/back.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+        //System.out.println(Paths.get("").toAbsolutePath().toString());
+        lblBack.setIcon(imageIcon);
+        //lblBack.setText("Back");
+        lblBack.setVerticalTextPosition(JLabel.CENTER);
+        lblBack.setHorizontalTextPosition(JLabel.RIGHT);
     }
     
     public int exportToPDF() {
@@ -72,7 +94,6 @@ public class Analytics extends javax.swing.JFrame {
             return 0;
         }
         finally{
-            setVisible(false);
             if(document.isOpen()){
                 document.close();
             }
@@ -119,21 +140,22 @@ public class Analytics extends javax.swing.JFrame {
     private void initComponents() {
 
         pnMain = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        lblHeader = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblData = new javax.swing.JTable();
         lblTotalBill = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         cmbFilter = new javax.swing.JComboBox();
-        jLabel10 = new javax.swing.JLabel();
+        lblFilter = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
+        lblBack = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel6.setText("Analytics");
+        lblHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblHeader.setText("Analytics");
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -157,7 +179,14 @@ public class Analytics extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("Filter:");
+        lblFilter.setText("Filter:");
+
+        lblBack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBackMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnMainLayout = new javax.swing.GroupLayout(pnMain);
         pnMain.setLayout(pnMainLayout);
@@ -166,42 +195,50 @@ public class Analytics extends javax.swing.JFrame {
             .addGroup(pnMainLayout.createSequentialGroup()
                 .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnMainLayout.createSequentialGroup()
-                        .addGap(343, 343, 343)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnMainLayout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnMainLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cmbFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addComponent(lblBack, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(272, 272, 272)
+                        .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnMainLayout.createSequentialGroup()
                         .addGap(341, 341, 341)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMainLayout.createSequentialGroup()
+                .addGap(0, 31, Short.MAX_VALUE)
+                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnMainLayout.createSequentialGroup()
+                        .addComponent(lblFilter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 798, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30))
             .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnMainLayout.createSequentialGroup()
                     .addGap(204, 204, 204)
                     .addComponent(lblTotalBill, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(125, 125, 125)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(457, Short.MAX_VALUE)))
+                    .addContainerGap(482, Short.MAX_VALUE)))
         );
         pnMainLayout.setVerticalGroup(
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnMainLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel6)
-                .addGap(43, 43, 43)
+                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnMainLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(lblHeader))
+                    .addGroup(pnMainLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblBack, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35)
                 .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                    .addComponent(lblFilter))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -230,13 +267,13 @@ public class Analytics extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(84, 84, 84))
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +281,7 @@ public class Analytics extends javax.swing.JFrame {
                 .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addGap(0, 16, Short.MAX_VALUE))
+                .addGap(0, 19, Short.MAX_VALUE))
         );
 
         pack();
@@ -260,8 +297,17 @@ public class Analytics extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbFilterActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        exportToPDF();
+        if(exportToPDF() == 1){
+            Helpers.MessageBox("Success", "Export PDF Success", "success");
+        } else {
+            Helpers.MessageBox("False", "Opps! Something went wrong", "error");
+        }
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
+        this.dispose();
+        (new IndexAdmin()).setVisible(true);
+    }//GEN-LAST:event_lblBackMouseClicked
 
     /**
      * @param args the command line arguments
@@ -301,11 +347,12 @@ public class Analytics extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cmbFilter;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblBack;
+    private javax.swing.JLabel lblFilter;
+    private javax.swing.JLabel lblHeader;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblTotalBill;
     private javax.swing.JPanel pnMain;

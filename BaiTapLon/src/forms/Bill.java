@@ -6,6 +6,7 @@
 
 package forms;
 
+import baitaplon.Helpers;
 import baitaplon.State;
 import com.itextpdf.text.*;
 import com.itextpdf.text.Document;
@@ -141,7 +142,6 @@ public class Bill extends javax.swing.JFrame {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
         LocalDateTime now = LocalDateTime.now();  
         return dtf.format(now);
-        
     }
     
     public int exportToPDF() {
@@ -351,12 +351,12 @@ public class Bill extends javax.swing.JFrame {
             }
             
             if(exportToPDF() != 0 && updateProducts() != 0) {
-                System.out.println("success");
+                Helpers.MessageBox("Success", "Print Successfully", "success");
             } else {
-                System.out.println("failed 1");
+                Helpers.MessageBox("False", "Opps! Something went wrong", "error");
             }
         } else {
-            System.out.println("failed 2");
+            Helpers.MessageBox("False", "Opps! Something went wrong", "error");
         }
         
         

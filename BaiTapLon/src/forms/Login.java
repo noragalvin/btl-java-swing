@@ -6,9 +6,13 @@
 
 package forms;
 
+import baitaplon.Helpers;
 import baitaplon.State;
 import controllers.BULStaff;
 import entities.DTOStaff;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -23,6 +27,15 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        getContentPane().setBackground(Helpers.mainBgColor);
+        
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("./src/images/restaurant.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        //System.out.println(Paths.get("").toAbsolutePath().toString());
+        lblIcon.setIcon(imageIcon);
+        //lblBack.setText("Back");
+        lblIcon.setVerticalTextPosition(JLabel.CENTER);
+        lblIcon.setHorizontalTextPosition(JLabel.RIGHT);
     }
 
     /**
@@ -35,17 +48,23 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         txtUsername = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
         lbUsername = new javax.swing.JLabel();
         lbPassword = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
+        lblIcon = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(241, 196, 15));
 
+        lbUsername.setForeground(new java.awt.Color(236, 240, 241));
         lbUsername.setText("Username");
 
+        lbPassword.setForeground(new java.awt.Color(236, 240, 241));
         lbPassword.setText("Password");
 
+        btnSubmit.setBackground(new java.awt.Color(230, 126, 34));
+        btnSubmit.setForeground(new java.awt.Color(236, 240, 241));
         btnSubmit.setText("Login");
         btnSubmit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -58,35 +77,41 @@ public class Login extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(104, 104, 104)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
+                        .addGap(45, 45, 45)
+                        .addComponent(btnSubmit))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbUsername)
                             .addComponent(lbPassword))
                         .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPassword)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(btnSubmit)))
-                .addContainerGap(123, Short.MAX_VALUE))
+                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                            .addComponent(txtPassword))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(136, Short.MAX_VALUE)
+                .addComponent(lblIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(95, 95, 95))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(85, 85, 85)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbUsername))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbPassword))
+                    .addComponent(lbPassword)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addComponent(btnSubmit)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -117,7 +142,7 @@ public class Login extends javax.swing.JFrame {
                     this.dispose();
             }
         } else {
-            
+            Helpers.MessageBox("False", "Username or password does not match", "error");
         }
         
         
@@ -165,7 +190,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel lbPassword;
     private javax.swing.JLabel lbUsername;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JLabel lblIcon;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

@@ -53,4 +53,8 @@ public class BULProduct {
     public int Update(DTOProduct p) {
         return daoProduct.Update(p);
     }
+    
+    public ArrayList<DTOProduct> smartSearch(String search) {
+        return daoProduct.smartSearch(search);
+    }
 }

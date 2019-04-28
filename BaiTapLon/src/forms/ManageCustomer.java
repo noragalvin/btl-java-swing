@@ -6,9 +6,11 @@
 
 package forms;
 
+import baitaplon.Helpers;
 import controllers.BULCustomer;
 import entities.DTOCategory;
 import entities.DTOCustomer;
+import java.awt.Color;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -34,10 +36,18 @@ public class ManageCustomer extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         loadData();
         initIconLabel();
+        
+        getContentPane().setBackground(new Color(241, 196, 15));
+        lblHeader.setForeground(new Color(52, 73, 94));
+        lblID.setForeground(new Color(52, 73, 94));
+        lblName.setForeground(new Color(52, 73, 94));
+        lblPhone.setForeground(new Color(52, 73, 94));
+        lblAddress.setForeground(new Color(52, 73, 94));
+        lblCurrentPage.setForeground(new Color(52, 73, 94));
     }
     
     public void initIconLabel(){ 
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon("./src/images/back.png").getImage().getScaledInstance(55, 50, Image.SCALE_DEFAULT));
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("./src/images/back.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
         //System.out.println(Paths.get("").toAbsolutePath().toString());
         lblBack.setIcon(imageIcon);
         //lblBack.setText("Back");
@@ -63,21 +73,21 @@ public class ManageCustomer extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblPhone = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblData = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
+        lblHeader = new javax.swing.JLabel();
         txtAddress = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        lblAddress = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
         lblPrevious = new javax.swing.JLabel();
         lblNext = new javax.swing.JLabel();
         lblCurrentPage = new javax.swing.JLabel();
@@ -85,7 +95,7 @@ public class ManageCustomer extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Phone");
+        lblPhone.setText("Phone");
 
         txtPhone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +103,7 @@ public class ManageCustomer extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Name");
+        lblName.setText("Name");
 
         btnAdd.setText("Add");
         btnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -141,8 +151,8 @@ public class ManageCustomer extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblData);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel3.setText("Customer Manager");
+        lblHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblHeader.setText("Customer Manager");
 
         txtAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,7 +160,7 @@ public class ManageCustomer extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Address");
+        lblAddress.setText("Address");
 
         txtID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,7 +168,7 @@ public class ManageCustomer extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("ID");
+        lblID.setText("ID");
 
         lblPrevious.setText(" < ");
         lblPrevious.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -215,8 +225,8 @@ public class ManageCustomer extends javax.swing.JFrame {
                                         .addComponent(btnEdit))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel5))
+                                            .addComponent(lblName)
+                                            .addComponent(lblID))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,14 +245,14 @@ public class ManageCustomer extends javax.swing.JFrame {
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addGap(48, 48, 48)
                                                 .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jLabel1)
+                                            .addComponent(lblPhone)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel4)
+                                                .addComponent(lblAddress)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(108, 108, 108)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -251,18 +261,18 @@ public class ManageCustomer extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(lblHeader)
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel5)
+                            .addComponent(lblPhone)
+                            .addComponent(lblID)
                             .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
+                            .addComponent(lblName)
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
+                            .addComponent(lblAddress)
                             .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -296,10 +306,10 @@ public class ManageCustomer extends javax.swing.JFrame {
         DTOCustomer c = new DTOCustomer(name, phone, address);
         int result = bulCustomer.Add(c);
         if(result > 0) {
-            System.out.println("success");
+            Helpers.MessageBox("Success", "Add successfully", "success");
             loadData();
         } else {
-            System.out.println("false");
+            Helpers.MessageBox("False", "Opps! Something went wrong", "error");
         }
     }//GEN-LAST:event_btnAddMouseClicked
 
@@ -312,10 +322,10 @@ public class ManageCustomer extends javax.swing.JFrame {
         DTOCustomer c = new DTOCustomer(id, name, phone, address);
         int result = bulCustomer.Update(c);
         if(result > 0) {
-            System.out.println("success");
+            Helpers.MessageBox("Success", "Edit successfully", "success");
             loadData();
         } else {
-            System.out.println("false");
+            Helpers.MessageBox("False", "Opps! Something went wrong", "error");
         }
     }//GEN-LAST:event_btnEditMouseClicked
 
@@ -324,10 +334,10 @@ public class ManageCustomer extends javax.swing.JFrame {
         DTOCustomer c = new DTOCustomer(Integer.parseInt(id));
         int result = bulCustomer.ToggleStatus(c);
         if(result > 0) {
-            System.out.println("success");
+            Helpers.MessageBox("Success", "Delete successfully", "success");
             loadData();
         } else {
-            System.out.println("false");
+            Helpers.MessageBox("False", "Opps! Something went wrong", "error");
         }
     }//GEN-LAST:event_btnDeleteMouseClicked
 
@@ -421,15 +431,15 @@ public class ManageCustomer extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblCurrentPage;
+    private javax.swing.JLabel lblHeader;
+    private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblNext;
+    private javax.swing.JLabel lblPhone;
     private javax.swing.JLabel lblPrevious;
     private javax.swing.JTable tblData;
     private javax.swing.JTextField txtAddress;

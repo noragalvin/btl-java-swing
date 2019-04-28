@@ -6,6 +6,7 @@
 
 package forms;
 
+import baitaplon.Helpers;
 import controllers.BULCustomer;
 import entities.DTOCustomer;
 
@@ -138,10 +139,10 @@ public class CreateCustomer extends javax.swing.JFrame {
         DTOCustomer c = new DTOCustomer(name, address, phone);
         int result = bulCustomer.Insert(c);
         if(result == 1) {
-            System.out.println("success");
+            Helpers.MessageBox("Success", "Add successfully", "success");
             setVisible(false);
         } else {
-            System.out.println("false");
+            Helpers.MessageBox("False", "Opps! Something went wrong", "error");
         }
     }//GEN-LAST:event_btnSubmitMouseClicked
 

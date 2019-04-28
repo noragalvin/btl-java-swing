@@ -64,6 +64,19 @@ public class DTOStaff {
         this.password = password;
         this.type = type;
     }
+    
+    public DTOStaff(String name, String username, String password, String type) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.type = type;
+    }
+    
+    public DTOStaff(int id) {
+        this.id = id;
+    }
+    
+    
 
     @Override
     public String toString() {

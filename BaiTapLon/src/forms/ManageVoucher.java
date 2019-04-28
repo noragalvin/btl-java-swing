@@ -6,9 +6,11 @@
 
 package forms;
 
+import baitaplon.Helpers;
 import controllers.BULVoucher;
 import entities.DTOCustomer;
 import entities.DTOVoucher;
+import java.awt.Color;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -34,10 +36,17 @@ public class ManageVoucher extends javax.swing.JFrame {
         
         loadData();
         initIconLabel();
+        
+        getContentPane().setBackground(new Color(241, 196, 15));
+        lblHeader.setForeground(new Color(52, 73, 94));
+        lblID.setForeground(new Color(52, 73, 94));
+        lblCode.setForeground(new Color(52, 73, 94));
+        lblPercent.setForeground(new Color(52, 73, 94));
+        lblCurrentPage.setForeground(new Color(52, 73, 94));
     }
     
     public void initIconLabel(){ 
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon("./src/images/back.png").getImage().getScaledInstance(55, 50, Image.SCALE_DEFAULT));
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("./src/images/back.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
         //System.out.println(Paths.get("").toAbsolutePath().toString());
         lblBack.setIcon(imageIcon);
         //lblBack.setText("Back");
@@ -64,27 +73,27 @@ public class ManageVoucher extends javax.swing.JFrame {
     private void initComponents() {
 
         txtPercent = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        lblPercent = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblData = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
+        lblHeader = new javax.swing.JLabel();
         txtCode = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        lblCode = new javax.swing.JLabel();
         lblPrevious = new javax.swing.JLabel();
         lblNext = new javax.swing.JLabel();
         lblCurrentPage = new javax.swing.JLabel();
         lblBack = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setText("Percent");
+        lblPercent.setText("Percent");
 
         btnAdd.setText("Add");
         btnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -132,8 +141,8 @@ public class ManageVoucher extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblData);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel3.setText("Voucher Manager");
+        lblHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblHeader.setText("Voucher Manager");
 
         txtCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,7 +150,7 @@ public class ManageVoucher extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Code");
+        lblCode.setText("Code");
 
         lblPrevious.setText(" < ");
         lblPrevious.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -170,59 +179,55 @@ public class ManageVoucher extends javax.swing.JFrame {
 
         jLabel1.setText("%");
 
-        jLabel4.setText("ID");
+        lblID.setText("ID");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblBack, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(lblPrevious)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblCurrentPage)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblNext)))
-                        .addGap(164, 164, 164)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lblBack, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(154, 154, 154)
+                .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblPrevious)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtPercent, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCurrentPage)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1)
-                        .addGap(131, 131, 131))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAdd)
-                        .addGap(55, 55, 55)
-                        .addComponent(btnEdit)
-                        .addGap(51, 51, 51)
-                        .addComponent(btnDelete)
-                        .addGap(62, 62, 62)
-                        .addComponent(btnSearch)
-                        .addGap(108, 108, 108))))
+                        .addComponent(lblNext))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lblID)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(43, 43, 43)
+                            .addComponent(lblCode)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(36, 36, 36)
+                            .addComponent(lblPercent)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtPercent, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel1)
+                            .addGap(131, 131, 131))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(btnAdd)
+                            .addGap(55, 55, 55)
+                            .addComponent(btnEdit)
+                            .addGap(51, 51, 51)
+                            .addComponent(btnDelete)
+                            .addGap(62, 62, 62)
+                            .addComponent(btnSearch)
+                            .addGap(108, 108, 108))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(28, 28, 28)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,15 +235,15 @@ public class ManageVoucher extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(lblHeader)
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel2)
+                            .addComponent(lblCode)
+                            .addComponent(lblPercent)
                             .addComponent(txtPercent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel4)
+                            .addComponent(lblID)
                             .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -246,16 +251,15 @@ public class ManageVoucher extends javax.swing.JFrame {
                             .addComponent(btnEdit)
                             .addComponent(btnDelete)
                             .addComponent(btnSearch)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblBack, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(120, 120, 120)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPrevious)
-                            .addComponent(lblCurrentPage)
-                            .addComponent(lblNext))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblBack, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrevious)
+                    .addComponent(lblCurrentPage)
+                    .addComponent(lblNext))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -268,10 +272,10 @@ public class ManageVoucher extends javax.swing.JFrame {
         DTOVoucher v = new DTOVoucher(code, percent);
         int result = bulVoucher.Add(v);
         if(result > 0) {
-            System.out.println("success");
+            Helpers.MessageBox("Success", "Add successfully", "success");
             loadData();
         } else {
-            System.out.println("false");
+            Helpers.MessageBox("False", "Opps! Something went wrong", "error");
         }
     }//GEN-LAST:event_btnAddMouseClicked
 
@@ -283,10 +287,10 @@ public class ManageVoucher extends javax.swing.JFrame {
         DTOVoucher v = new DTOVoucher(id, code, percent);
         int result = bulVoucher.Update(v);
         if(result > 0) {
-            System.out.println("success");
+            Helpers.MessageBox("Success", "Edit successfully", "success");
             loadData();
         } else {
-            System.out.println("false");
+            Helpers.MessageBox("False", "Opps! Something went wrong", "error");
         }
     }//GEN-LAST:event_btnEditMouseClicked
 
@@ -295,10 +299,10 @@ public class ManageVoucher extends javax.swing.JFrame {
         DTOVoucher v = new DTOVoucher(id);
         int result = bulVoucher.ToggleStatus(v);
         if(result > 0) {
-            System.out.println("success");
+            Helpers.MessageBox("Success", "Delete successfully", "success");
             loadData();
         } else {
-            System.out.println("false");
+            Helpers.MessageBox("False", "Opps! Something went wrong", "error");
         }
     }//GEN-LAST:event_btnDeleteMouseClicked
 
@@ -386,14 +390,14 @@ public class ManageVoucher extends javax.swing.JFrame {
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBack;
+    private javax.swing.JLabel lblCode;
     private javax.swing.JLabel lblCurrentPage;
+    private javax.swing.JLabel lblHeader;
+    private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblNext;
+    private javax.swing.JLabel lblPercent;
     private javax.swing.JLabel lblPrevious;
     private javax.swing.JTable tblData;
     private javax.swing.JTextField txtCode;
