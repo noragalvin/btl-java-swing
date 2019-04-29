@@ -159,7 +159,7 @@ public class EnterCustomer extends javax.swing.JFrame {
                 Helpers.MessageBox("Success", "1 voucher founded", "success");
                 this.voucher = v;
             } else {
-                Helpers.MessageBox("False", "Voucher not found", "error");
+                //Helpers.MessageBox("False", "Voucher not found", "error");
                 this.voucher = new DTOVoucher(1, 0, 0, "");
             }
         } else {

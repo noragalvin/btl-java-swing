@@ -341,11 +341,13 @@ public class Bill extends javax.swing.JFrame {
             System.out.println(lastBill);
             Iterator iterator = State.currentProducts.entrySet().iterator();
 
+            DTOProduct product;
             while (iterator.hasNext()) {
                 Map.Entry hm = (Map.Entry) iterator.next();
-                DTOProductBill db = new DTOProductBill(lastBill.getId(), (int)hm.getValue(), ((String)hm.getKey()).trim(), totalPrices - discount_prices);
-                System.out.println("db+++++++");
-                System.out.println(db);
+                product = bulProduct.getAProduct((String)hm.getKey());
+                double price = product.getPrice() * (double)((Integer)hm.getValue()).intValue();
+                price = price * (double)(100 - voucher.getDiscount_percent())/100;
+                DTOProductBill db = new DTOProductBill(lastBill.getId(), (int)hm.getValue(), ((String)hm.getKey()).trim(), price);
                 bulProductBill.Insert(db);
                 //System.out.println("Key: "+hm.getKey() + " & Value: " + hm.getValue());
             }
