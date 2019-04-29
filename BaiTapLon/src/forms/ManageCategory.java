@@ -11,6 +11,7 @@ import controllers.BULCategory;
 import entities.DTOCategory;
 import java.awt.Color;
 import java.awt.Image;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -23,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class ManageCategory extends javax.swing.JFrame {
     BULCategory bulCategory = new BULCategory();
     ArrayList<DTOCategory> categories;
+    String oldName;
     
     /**
      * Creates new form ManageCategory
@@ -31,6 +33,7 @@ public class ManageCategory extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         loadData();
+        
         
         initIconLabel();
         
@@ -221,6 +224,7 @@ public class ManageCategory extends javax.swing.JFrame {
         int result = bulCategory.Add(c);
         if(result > 0) {
             Helpers.MessageBox("Success", "Add successfully", "success");
+            new File("./src/forms/pictures/" + txtName.getText()).mkdirs();
             loadData();
         } else {
             Helpers.MessageBox("False", "Opps! Something went wrong", "error");
@@ -233,6 +237,15 @@ public class ManageCategory extends javax.swing.JFrame {
         DTOCategory c = new DTOCategory(id, name);
         int result = bulCategory.Update(c);
         if(result > 0) {
+            File dir = new File("./src/forms/pictures/" + this.oldName);
+            System.out.println(oldName);
+            System.out.println(txtName.getText());
+            if (!dir.isDirectory()) {
+              System.err.println("There is no directory @ given path");
+            } else {
+                File newDir = new File("./src/forms/pictures/" + txtName.getText());
+                dir.renameTo(newDir);
+            }
             Helpers.MessageBox("Success", "Edit successfully", "success");
             loadData();
         } else {
@@ -270,7 +283,7 @@ public class ManageCategory extends javax.swing.JFrame {
         // set the selected row data into jtextfields
         txtID.setText(model.getValueAt(selectedRowIndex, 0).toString());
         txtName.setText(model.getValueAt(selectedRowIndex, 1).toString());
-       
+        this.oldName = txtName.getText();
        
     }//GEN-LAST:event_tblDataMouseClicked
 
