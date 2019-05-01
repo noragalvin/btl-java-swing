@@ -24,6 +24,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,9 +35,10 @@ import javax.swing.table.DefaultTableModel;
 public class ManageProduct extends javax.swing.JFrame {
     BULProduct bulProduct = new BULProduct();
     BULCategory bulCategory = new BULCategory();
-
+    
     ArrayList<DTOProduct> products;
     ArrayList<DTOCategory> categories;
+    
     int limit = 10;
     int offset = 0;
     int currentPage = 1;
@@ -49,6 +51,7 @@ public class ManageProduct extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         loadData();
         loadCategories();
+        
         initIconLabel();
         
         getContentPane().setBackground(new Color(241, 196, 15));
@@ -80,11 +83,10 @@ public class ManageProduct extends javax.swing.JFrame {
             dtm.addRow(new Object[] {product.getId(), product.getName(), product.getCatName(), product.getPrice(), product.getQuantity(), product.getImage()});
         }
     }
-
     
     public void loadCategories() {
-       cmbCategory.removeAllItems();
-       categories = bulCategory.getCategories();
+        cmbCategory.removeAllItems();
+        categories = bulCategory.getCategories();
         for (DTOCategory category : categories) {
             cmbCategory.addItem(new ComboItem(category.getName(), category.getId()));
         }
@@ -334,14 +336,20 @@ public class ManageProduct extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
+        String id = txtID.getText();
         String name = txtName.getText();
         int quantity = Integer.parseInt(txtQuantity.getText());
+        
         Object item = cmbCategory.getSelectedItem();
-        int category_id = ((ComboItem)item).getValue();
+        ComboItem ci = (ComboItem)item;
+        int category_id = ci.getValue();
+        
         double price = Double.parseDouble(txtPrice.getText());
         String image = txtAvatar.getText();
-        String id = txtID.getText();
+        
+        
         DTOProduct p = new DTOProduct(id, quantity, category_id, name, price, image);
+        
         int result = bulProduct.Add(p);
         if(result > 0) {
             Helpers.MessageBox("Success", "Add successfully", "success");
@@ -359,7 +367,9 @@ public class ManageProduct extends javax.swing.JFrame {
         double price = Double.parseDouble(txtPrice.getText());
         String image = txtAvatar.getText();
         String id = txtID.getText();
+        
         DTOProduct p = new DTOProduct(id, quantity, category_id, name, price, image);
+        
         int result = bulProduct.Update(p);
         if(result > 0) {
             Helpers.MessageBox("Success", "Edit successfully", "success");
@@ -423,7 +433,6 @@ public class ManageProduct extends javax.swing.JFrame {
         txtAvatar.setText(model.getValueAt(selectedRowIndex, 5).toString());
 
         int count = cmbCategory.getItemCount();
-        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < count; i++) {
             String selectedCategory = model.getValueAt(selectedRowIndex, 2).toString();
             String cmbItem = cmbCategory.getItemAt(i).toString();
@@ -443,8 +452,13 @@ public class ManageProduct extends javax.swing.JFrame {
 
     private void lblPreviousMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPreviousMouseClicked
         this.currentPage--;
-        offset = (currentPage - 1) * limit;
-        loadData();
+        if(this.currentPage <= 0) {
+            this.currentPage++;
+            Helpers.MessageBox("Warning", "Out of range pagination pages", "error");
+        } else {
+            offset = (currentPage - 1) * limit;
+            loadData();
+        }
     }//GEN-LAST:event_lblPreviousMouseClicked
 
     private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked

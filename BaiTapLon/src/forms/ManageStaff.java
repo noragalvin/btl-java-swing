@@ -63,6 +63,7 @@ public class ManageStaff extends javax.swing.JFrame {
     }
     
     public void loadData() {
+        lblCurrentPage.setText(Integer.toString(this.currentPage));
         staffs = bulStaff.getStaffs(offset, limit);
         DefaultTableModel dtm = (DefaultTableModel)tblData.getModel();
         dtm.setRowCount(0);
@@ -324,8 +325,13 @@ public class ManageStaff extends javax.swing.JFrame {
 
     private void lblPreviousMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPreviousMouseClicked
         this.currentPage--;
-        offset = (currentPage - 1) * limit;
-        loadData();
+        if(this.currentPage <= 0) {
+            this.currentPage++;
+            Helpers.MessageBox("Warning", "Out of range pagination pages", "error");
+        } else {
+            offset = (currentPage - 1) * limit;
+            loadData();
+        }
     }//GEN-LAST:event_lblPreviousMouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked

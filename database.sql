@@ -136,10 +136,10 @@ create trigger trg_update_quantity_products on products
 for update
 as
 	begin
-		declare @before int
-		declare @after int
-		select @before = quantity from deleted
-		select @after = quantity from inserted
+		declare @before int 
+		declare @after int 
+		select @before = quantity from deleted 
+		select @after = quantity from inserted 
 		if (@before <> @after)
 			begin
 				if (@after < 0)

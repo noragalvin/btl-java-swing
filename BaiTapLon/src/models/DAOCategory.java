@@ -96,8 +96,8 @@ public class DAOCategory {
         query = String.format("SELECT * FROM categories WHERE status = 1");
         
         ResultSet rs = db.getData(query);
-        
         try {
+        
             while(rs.next()){
                 //DTOCategory cat = new DTOCategory(rs.getInt("catID"), rs.getInt("catStatus"), rs.getString("catName"));
                 DTOCategory c = new DTOCategory(rs.getInt("id"), rs.getInt("status"), rs.getString("name"));
