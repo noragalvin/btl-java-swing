@@ -455,11 +455,18 @@ public class IndexStaff extends javax.swing.JFrame {
         int rows = categories.size() + 1;
         int columns = 1;
         System.out.println(rows);
+        pnCategories.removeAll();
         pnCategories.setLayout(new GridLayout(rows, columns, -1, -1));
         
         // Add tab all
         JLabel lblAll = new JLabel("All", JLabel.CENTER);
         lblAll.setForeground(Helpers.mainFgColor);
+        if(filter.equals("All") == true){
+            lblAll.setBackground(Helpers.subBgColor);
+        } else {
+            lblAll.setBackground(Helpers.mainBgColor);
+        }
+        lblAll.setOpaque(true);
         lblAll.setBorder(BorderFactory.createLineBorder(Helpers.mainBordercolor));
         lblAll.setPreferredSize(new Dimension(100, 50));
         lblAll.addMouseListener(new MouseAdapter() {
@@ -467,6 +474,7 @@ public class IndexStaff extends javax.swing.JFrame {
                 filter = "All";
                 products = bulProduct.getProducts(filter, limit, offset);
                 initProducts(products);
+                initCategories();
             }
         });
         pnCategories.add(lblAll);
@@ -478,12 +486,19 @@ public class IndexStaff extends javax.swing.JFrame {
             l.setForeground(Helpers.mainFgColor);
             l.setBorder(BorderFactory.createLineBorder(Helpers.mainBordercolor));
             l.setPreferredSize(new Dimension(100, 50));
-            
+            l.setBackground(Helpers.mainBgColor);
+            if(filter.equals(category.getName()) == true){
+                l.setBackground(Helpers.subBgColor);
+            } else {
+                l.setBackground(Helpers.mainBgColor);
+            }
+            l.setOpaque(true);
             l.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent ev){
                     filter = category.getName();
                     products = bulProduct.getProducts(filter, limit, offset);
                     initProducts(products);
+                    initCategories();
                 }
             });
             
