@@ -96,7 +96,7 @@ public class DAOProduct {
         return n;
     }
     
-    public int ToggleStatus(DTOProduct p){
+    public int ToggleStatus(id){
         int n = 0;
         
         String query = "UPDATE products SET status = 1 - status WHERE id = ?";
@@ -105,7 +105,7 @@ public class DAOProduct {
         try {
             pre = conn.prepareStatement(query);
             
-            pre.setString(1, p.getId());
+            pre.setString(1, id);
             
             n = pre.executeUpdate();
         } catch (SQLException ex) {
