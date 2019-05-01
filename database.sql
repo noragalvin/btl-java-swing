@@ -109,7 +109,7 @@ insert into products(id, name, image, price, quantity, category_id) values ('V05
 insert into products(id, name, image, price, quantity, category_id) values ('D01', 'Strawberry Mojito', 'strawberry-mojito.jpg', 10000, 50, 4)
 insert into products(id, name, image, price, quantity, category_id) values ('D02', 'Fruit Flavored Water', 'fruit-flavored-water.jpg', 80000, 50, 4)
 insert into products(id, name, image, price, quantity, category_id) values ('D03', 'Rhubarb Margarita', 'rhubarb-margarita.jpg', 20000, 50, 4)
-insert into products(id, name, image, price, quantity, category_id) values ('D04', 'Mexican Strawberry Water Agua De Fresa', 'mexican-strawberry-water-agua-de-fresa.jpg', 40000, 50, 4)
+insert into products(id, name, image, price, quantity, category_id) values ('D04', 'Mexican Strawberry Water', 'mexican-strawberry-water-agua-de-fresa.jpg', 40000, 50, 4)
 insert into products(id, name, image, price, quantity, category_id) values ('D05', 'Peanut Butter Banana Smoothie', 'peanut-butter-banana-smoothie.jpg', 10000, 50, 4)
 
 
