@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class Helpers {
     public static Color mainBgColor = new Color(241, 196, 15);
+    public static Color subBgColor = new Color(243, 156, 18);
     public static Color mainFgColor = new Color(236, 240, 241);
     public static Color mainBordercolor = new Color(52, 73, 94);
     

@@ -163,7 +163,7 @@ public class DAOCustomer {
         try {
             while(rs.next()){
                 //DTOCategory cat = new DTOCategory(rs.getInt("catID"), rs.getInt("catStatus"), rs.getString("catName"));
-                DTOCustomer c = new DTOCustomer(rs.getInt("id"), rs.getString("name"), rs.getString("phone"), rs.getString("address"));
+                DTOCustomer c = new DTOCustomer(rs.getInt("id"), rs.getString("name"), rs.getString("address"), rs.getString("phone"));
                 categories.add(c);
             }
         } catch (SQLException ex) {
