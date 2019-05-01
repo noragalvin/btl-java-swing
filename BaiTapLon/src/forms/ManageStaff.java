@@ -40,6 +40,8 @@ public class ManageStaff extends javax.swing.JFrame {
         loadData();
         initIconLabel();
         
+        
+        
         getContentPane().setBackground(new Color(241, 196, 15));
         lblHeader.setForeground(new Color(52, 73, 94));
         lblID.setForeground(new Color(52, 73, 94));
@@ -47,6 +49,8 @@ public class ManageStaff extends javax.swing.JFrame {
         lblPhone.setForeground(new Color(52, 73, 94));
         lblAddress.setForeground(new Color(52, 73, 94));
         lblCurrentPage.setForeground(new Color(52, 73, 94));
+        radAdmin.setBackground(Helpers.mainBgColor);
+        radStaff.setBackground(Helpers.mainBgColor);
     }
     
     public void initIconLabel(){ 
