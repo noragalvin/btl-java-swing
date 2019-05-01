@@ -146,17 +146,17 @@ public class Bill extends javax.swing.JFrame {
     
     public int exportToPDF() {
         //print the panel to pdf
-        Rectangle pagesize = new Rectangle(841, 1190);
+        Rectangle pagesize = new Rectangle(602, 543);
         Document document = new Document(pagesize);
         try {
             PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("./PDF/Bill.pdf"));
             document.open();
             PdfContentByte contentByte = writer.getDirectContent();
-            PdfTemplate template = contentByte.createTemplate(800, 800);
-            Graphics2D g2 = template.createGraphics(800, 800);
+            PdfTemplate template = contentByte.createTemplate(602, 543);
+            Graphics2D g2 = template.createGraphics(602, 543);
             pnBill.print(g2);
             g2.dispose();
-            contentByte.addTemplate(template, 30, 300);
+            contentByte.addTemplate(template, 0, 0);
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
@@ -239,8 +239,18 @@ public class Bill extends javax.swing.JFrame {
             .addGroup(pnBillLayout.createSequentialGroup()
                 .addGroup(pnBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnBillLayout.createSequentialGroup()
-                        .addGap(256, 256, 256)
-                        .addComponent(jLabel2))
+                        .addGap(20, 20, 20)
+                        .addComponent(pnListProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnBillLayout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBillLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(152, 152, 152))
+            .addGroup(pnBillLayout.createSequentialGroup()
+                .addGroup(pnBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnBillLayout.createSequentialGroup()
                         .addGap(108, 108, 108)
                         .addGroup(pnBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,21 +263,11 @@ public class Bill extends javax.swing.JFrame {
                             .addComponent(lblDate)
                             .addComponent(lblPhone)
                             .addComponent(lblAddress)
-                            .addComponent(lblName))))
+                            .addComponent(lblName)))
+                    .addGroup(pnBillLayout.createSequentialGroup()
+                        .addGap(256, 256, 256)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(pnBillLayout.createSequentialGroup()
-                .addGroup(pnBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnBillLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(pnListProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnBillLayout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBillLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(152, 152, 152))
         );
         pnBillLayout.setVerticalGroup(
             pnBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,6 +340,7 @@ public class Bill extends javax.swing.JFrame {
             System.out.println("last bill");
             System.out.println(lastBill);
             Iterator iterator = State.currentProducts.entrySet().iterator();
+            State.ResetProduct();
 
             DTOProduct product;
             while (iterator.hasNext()) {
