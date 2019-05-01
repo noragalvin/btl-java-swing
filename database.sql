@@ -136,10 +136,10 @@ create trigger trg_update_quantity_products on products
 for update
 as
 	begin
-		declare @before int
-		declare @after int
-		select @before = quantity from deleted
-		select @after = quantity from inserted
+		declare @before int 
+		declare @after int 
+		select @before = quantity from deleted 
+		select @after = quantity from inserted 
 		if (@before <> @after)
 			begin
 				if (@after < 0)
@@ -163,11 +163,11 @@ select * from categories
 select * from customers
 
 
-insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(1, 1, 50000, 10, '2019-04-26')
-insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(2, 2, 60000, 10, '2019-04-25')
+insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(1, 1, 50000, 10, '2019-05-01')
+insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(2, 2, 60000, 10, '2019-05-01')
 insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(1, 1, 70000, 10, '2019-04-24')
 insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(2, 2, 80000, 10, '2019-04-23')
-insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(1, 3, 90000, 10, '2019-04-27')
+insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(1, 3, 90000, 10, '2019-05-01')
 
 
 insert into bills(staff_id, customer_id, total_prices, discount_prices, created_at) values(2, 2, 80000, 10, '2019-03-23')

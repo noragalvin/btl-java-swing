@@ -130,7 +130,8 @@ public class DAOProduct {
             default:
                 query = String.format("SELECT products.*, categories.id as catID, categories.name as catName, categories.status as catStatus "
                         + "FROM products INNER JOIN categories ON products.category_id = categories.id "
-                        + "WHERE categories.name = N'%s' "
+                        + "WHERE products.status = 1 "
+                        + "AND categories.name = N'%s' "
                         + "ORDER BY id "
                         + "OFFSET %d ROWS "
                         + "FETCH NEXT %d ROWS ONLY;", filter, offset, limit);

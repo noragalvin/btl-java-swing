@@ -238,16 +238,16 @@ public class ManageCategory extends javax.swing.JFrame {
         int result = bulCategory.Update(c);
         if(result > 0) {
             File dir = new File("./src/forms/pictures/" + this.oldName);
-            System.out.println(oldName);
-            System.out.println(txtName.getText());
+            
             if (!dir.isDirectory()) {
-              System.err.println("There is no directory @ given path");
+              Helpers.MessageBox("Error", "Folder not found", "error");
             } else {
                 File newDir = new File("./src/forms/pictures/" + txtName.getText());
                 dir.renameTo(newDir);
+                Helpers.MessageBox("Success", "Edit successfully", "success");
+                loadData();
             }
-            Helpers.MessageBox("Success", "Edit successfully", "success");
-            loadData();
+            
         } else {
             Helpers.MessageBox("False", "Opps! Something went wrong", "error");
         }
@@ -258,8 +258,16 @@ public class ManageCategory extends javax.swing.JFrame {
         DTOCategory c = new DTOCategory(Integer.parseInt(id));
         int result = bulCategory.ToggleStatus(c);
         if(result > 0) {
-            Helpers.MessageBox("Success", "Delete successfully", "success");
-            loadData();
+            File dir = new File("./src/forms/pictures/" + txtName.getText());
+            
+            if (!dir.isDirectory()) {
+              Helpers.MessageBox("Error", "Folder not found", "error");
+            } else {
+                dir.delete();
+                Helpers.MessageBox("Success", "Delete successfully", "success");
+                loadData();
+            }
+            
         } else {
             Helpers.MessageBox("False", "Opps! Something went wrong", "error");
         }

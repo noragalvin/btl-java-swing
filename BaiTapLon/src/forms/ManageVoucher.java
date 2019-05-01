@@ -55,6 +55,7 @@ public class ManageVoucher extends javax.swing.JFrame {
     }
     
     public void loadData() {
+        lblCurrentPage.setText(Integer.toString(this.currentPage));
         vouchers = bulVoucher.getVouchers(offset, limit);
         DefaultTableModel dtm = (DefaultTableModel)tblData.getModel();
         dtm.setRowCount(0);
@@ -266,7 +267,6 @@ public class ManageVoucher extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-
         String code = txtCode.getText();
         int percent = Integer.parseInt(txtPercent.getText());
         DTOVoucher v = new DTOVoucher(code, percent);
@@ -333,13 +333,19 @@ public class ManageVoucher extends javax.swing.JFrame {
 
     private void lblPreviousMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPreviousMouseClicked
         this.currentPage--;
-        offset = (currentPage - 1) * limit;
-        loadData();
+        if(this.currentPage <= 0) {
+            this.currentPage++;
+            Helpers.MessageBox("Warning", "Out of range pagination pages", "error");
+        } else {
+            offset = (currentPage - 1) * limit;
+            loadData();
+        }
+        
     }//GEN-LAST:event_lblPreviousMouseClicked
 
     private void lblNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNextMouseClicked
-
         this.currentPage++;
+        System.out.println(this.currentPage);
         offset = (currentPage - 1) * limit;
         loadData();
     }//GEN-LAST:event_lblNextMouseClicked

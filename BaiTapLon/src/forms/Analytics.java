@@ -78,17 +78,19 @@ public class Analytics extends javax.swing.JFrame {
     
     public int exportToPDF() {
         //print the panel to pdf
-        Rectangle pagesize = new Rectangle(841, 1190);
+        
+        // inch * 72 pointer = user units
+        Rectangle pagesize = new Rectangle(859, 460);
         Document document = new Document(pagesize);
         try {
             PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("./PDF/Analytic.pdf"));
             document.open();
             PdfContentByte contentByte = writer.getDirectContent();
-            PdfTemplate template = contentByte.createTemplate(800, 800);
-            Graphics2D g2 = template.createGraphics(800, 800);
+            PdfTemplate template = contentByte.createTemplate(859, 460);
+            Graphics2D g2 = template.createGraphics(859, 460);
             pnMain.print(g2);
             g2.dispose();
-            contentByte.addTemplate(template, 30, 300);
+            contentByte.addTemplate(template, 0, 0);
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
